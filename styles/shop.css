@@ -1,0 +1,55 @@
+.shop-item {
+    background-color: pink;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.shop-item-image {
+    background-color: red;
+    width: 64px;
+    height: 64px;
+}
+.left-shop-item-part {
+    display: flex;
+    gap: 8px;
+}
+
+.left-shop-item-part > div {
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+}
+
+.right-shop-item-part {
+    margin-right: 8px;
+    text-align: right;
+}
+
+.shop-item {
+    color: black;
+  
+    font-size: 24px;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.shop-item-price {
+    font-size: 16px;
+    color: green;
+}
+
+.shop-item-attack {
+    font-size: 16px;
+    color: red;
+}
+
+.shop-item:hover {
+    background-color: rgb(253, 215, 221);
+}
