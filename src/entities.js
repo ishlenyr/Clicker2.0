@@ -55,7 +55,7 @@ const unitTypes = [
 
 class Unit {
     get cost() {
-        return this.baseCost * (1.15 ** this.count);
+        return Math.round(this.baseCost * (1.15 ** this.count));
     }
 
     constructor(type) {

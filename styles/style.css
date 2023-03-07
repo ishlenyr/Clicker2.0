@@ -7,6 +7,7 @@
 }
 
 .death-anim {
+    pointer-events: none;
     animation: death-anim var(--death-anim-delay);
 }
 
@@ -63,7 +64,13 @@
 
 #enemyName {
     color: black;
-  
+    font-size: 24px;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.info-text {
+    color: black;
     font-size: 24px;
     font-family: sans-serif;
     font-weight: bold;

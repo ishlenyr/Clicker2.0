@@ -11,6 +11,11 @@
     user-select: none;
 }
 
+.shop-item-disabled {
+    filter: brightness(0.6);
+    pointer-events: none;
+}
+
 .shop-item-image {
     background-color: red;
     width: 64px;

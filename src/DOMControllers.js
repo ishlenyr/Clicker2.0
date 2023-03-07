@@ -5,7 +5,7 @@
 import { setBarFill } from './bars.js';
 import * as helper from './helpers.js';
 
-export { EnemyDOMController, UnitDOMController };
+export { EnemyDOMController, UnitDOMController, InfoDOMController };
 
 const style = getComputedStyle(document.body);
 const deathAnimDelay = helper.cssDelayToNumber(style.getPropertyValue('--death-anim-delay'));
@@ -29,10 +29,8 @@ class EnemyDOMController {
     }
 
     playDeathAnim() {
-        enemyImage.onclick = null;
         enemyImage.classList.add('death-anim');
         setTimeout(() => {
-            enemyImage.onclick = this.game.hitEnemy.bind(this.game);
             enemyImage.classList.remove('death-anim');
         }, deathAnimDelay);
         return deathAnimDelay;
@@ -81,11 +79,29 @@ class UnitDOMController {
 
     updateCost() {
         const price = this.element.getElementsByClassName('shop-item-price')[0];
-        price.textContent = Number(this.unit.cost.toFixed(2));
+        price.textContent = Number(this.unit.cost);
     }
 
     updateCount() {
         const count = this.element.getElementsByClassName('shop-item-count')[0];
         count.textContent = this.unit.count;
+    }
+
+    updateAvaliability() {
+        if (this.game.money < this.unit.cost) {
+            this.element.classList.add('shop-item-disabled');
+        }
+        else {
+            this.element.classList.remove('shop-item-disabled');
+        }
+    }
+}
+
+class InfoDOMController {
+    updateMoneyBar(money) {
+        moneyBar.textContent = money;
+    }
+    updateAttackBar(attack) {
+        attackBar.textContent = attack;
     }
 }
