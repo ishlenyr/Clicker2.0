@@ -1,3 +1,3 @@
 export function cssDelayToNumber(value) {
-    return Number(value.replace('s', '000'));
+  return parseInt(value) * 1000;
 }

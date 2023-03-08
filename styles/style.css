@@ -1,77 +1,76 @@
 :root {
-    --death-anim-delay: 1s;
+  --death-anim-delay: 1s;
 }
 
 .hit-anim {
-    animation: hit-anim 150ms;
+  animation: hit-anim 150ms;
 }
 
 .death-anim {
-    pointer-events: none;
-    animation: death-anim var(--death-anim-delay);
+  pointer-events: none;
+  animation: death-anim var(--death-anim-delay);
 }
 
 #enemyImage {
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -o-user-select: none;
-    user-select: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 
 @keyframes hit-anim {
-    0% {
-        filter: hue-rotate(150deg) saturate(400%);
-    }
+  0% {
+    filter: hue-rotate(150deg) saturate(400%);
+  }
 
-    50% {
-        transform: scale(0.9);
-        filter: hue-rotate(150deg) saturate(400%);
-    }
+  50% {
+    transform: scale(0.9);
+    filter: hue-rotate(150deg) saturate(400%);
+  }
 }
 
 @keyframes death-anim {
-    5% {
-        filter: hue-rotate(150deg) saturate(400%);
-        transform: translateX(-30%);
-    }
+  5% {
+    filter: hue-rotate(150deg) saturate(400%);
+    transform: translateX(-30%);
+  }
 
-    10% {
-        filter: hue-rotate(150deg) saturate(400%);
-        transform: translateX(30%);
-    }
+  10% {
+    filter: hue-rotate(150deg) saturate(400%);
+    transform: translateX(30%);
+  }
 
-    15% {
-        filter: hue-rotate(150deg) saturate(400%);
-        transform: translateX(-15%);
-    }
+  15% {
+    filter: hue-rotate(150deg) saturate(400%);
+    transform: translateX(-15%);
+  }
 
-    20% {
-        filter: hue-rotate(150deg) saturate(400%);
-        transform: translateX(15%);
-    }
+  20% {
+    filter: hue-rotate(150deg) saturate(400%);
+    transform: translateX(15%);
+  }
 
-    25% {
-        filter: hue-rotate(150deg) saturate(400%);
-        transform: translateX(0);
-    }
+  25% {
+    filter: hue-rotate(150deg) saturate(400%);
+    transform: translateX(0);
+  }
 
-    100% {
-        opacity: 0;
-    }
-
+  100% {
+    opacity: 0;
+  }
 }
 
 #enemyName {
-    color: black;
-    font-size: 24px;
-    font-family: sans-serif;
-    font-weight: bold;
+  color: black;
+  font-size: 24px;
+  font-family: sans-serif;
+  font-weight: bold;
 }
 
 .info-text {
-    color: black;
-    font-size: 24px;
-    font-family: sans-serif;
-    font-weight: bold;
+  color: black;
+  font-size: 24px;
+  font-family: sans-serif;
+  font-weight: bold;
 }

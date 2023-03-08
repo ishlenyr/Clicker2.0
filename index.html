@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" src="./src/main.js"></script>
-    <link rel="stylesheet" href="./styles/style.css">
-    <link rel="stylesheet" href="./styles/bars.css">
-    <link rel="stylesheet" href="./styles/shop.css">
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/bars.css" />
+    <link rel="stylesheet" href="./styles/shop.css" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- ENEMY-->
-    <img draggable="false" id="enemyImage">
+    <img draggable="false" id="enemyImage" />
     <div id="enemyName"></div>
     <div class="bar-frame">
-        <div class="bar">
-            <div class="bar-fill" id="enemyHealthBar"></div>
-            <span class="bar-text" id="enemyHealthBarText">HEALTH</span>
-        </div>
+      <div class="bar">
+        <div class="bar-fill" id="enemyHealthBar"></div>
+        <span class="bar-text" id="enemyHealthBarText">HEALTH</span>
+      </div>
     </div>
 
     <!-- MONEY, ATTACK-->
@@ -29,99 +28,97 @@
 
     <!-- SHOP LIST-->
     <div class="shop-list">
-        <div class="shop-item" id="miniCrewmate">
-            <div class="left-shop-item-part">
-                <img class="shop-item-image">
-                <div>
-                    <div class="shop-item-name"></div>
-                    <div class="shop-item-price"></div>
-                </div>
-            </div>
-            <div class="right-shop-item-part">
-                <div class="shop-item-attack"></div>
-                <div class="shop-item-count"></div>
-            </div>
+      <div class="shop-item" id="miniCrewmate">
+        <div class="left-shop-item-part">
+          <img class="shop-item-image" />
+          <div>
+            <div class="shop-item-name"></div>
+            <div class="shop-item-price"></div>
+          </div>
         </div>
-        <div class="shop-item" id="dog">
-            <div class="left-shop-item-part">
-                <img class="shop-item-image">
-                <div>
-                    <div class="shop-item-name"></div>
-                    <div class="shop-item-price"></div>
-                </div>
-            </div>
-            <div class="right-shop-item-part">
-                <div class="shop-item-attack"></div>
-                <div class="shop-item-count"></div>
-            </div>
+        <div class="right-shop-item-part">
+          <div class="shop-item-attack"></div>
+          <div class="shop-item-count"></div>
         </div>
-        <div class="shop-item" id="crewmate">
-            <div class="left-shop-item-part">
-                <img class="shop-item-image">
-                <div>
-                    <div class="shop-item-name"></div>
-                    <div class="shop-item-price"></div>
-                </div>
-            </div>
-            <div class="right-shop-item-part">
-                <div class="shop-item-attack"></div>
-                <div class="shop-item-count"></div>
-            </div>
+      </div>
+      <div class="shop-item" id="dog">
+        <div class="left-shop-item-part">
+          <img class="shop-item-image" />
+          <div>
+            <div class="shop-item-name"></div>
+            <div class="shop-item-price"></div>
+          </div>
         </div>
-        <div class="shop-item" id="creamateKnife">
-            <div class="left-shop-item-part">
-                <img class="shop-item-image">
-                <div>
-                    <div class="shop-item-name"></div>
-                    <div class="shop-item-price"></div>
-                </div>
-            </div>
-            <div class="right-shop-item-part">
-                <div class="shop-item-attack"></div>
-                <div class="shop-item-count"></div>
-            </div>
+        <div class="right-shop-item-part">
+          <div class="shop-item-attack"></div>
+          <div class="shop-item-count"></div>
         </div>
-        <div class="shop-item" id="creamatePistol">
-            <div class="left-shop-item-part">
-                <img class="shop-item-image">
-                <div>
-                    <div class="shop-item-name"></div>
-                    <div class="shop-item-price"></div>
-                </div>
-            </div>
-            <div class="right-shop-item-part">
-                <div class="shop-item-attack"></div>
-                <div class="shop-item-count"></div>
-            </div>
+      </div>
+      <div class="shop-item" id="crewmate">
+        <div class="left-shop-item-part">
+          <img class="shop-item-image" />
+          <div>
+            <div class="shop-item-name"></div>
+            <div class="shop-item-price"></div>
+          </div>
         </div>
-        <div class="shop-item" id="creamateAlien">
-            <div class="left-shop-item-part">
-                <img class="shop-item-image">
-                <div>
-                    <div class="shop-item-name"></div>
-                    <div class="shop-item-price"></div>
-                </div>
-            </div>
-            <div class="right-shop-item-part">
-                <div class="shop-item-attack"></div>
-                <div class="shop-item-count"></div>
-            </div>
+        <div class="right-shop-item-part">
+          <div class="shop-item-attack"></div>
+          <div class="shop-item-count"></div>
         </div>
-        <div class="shop-item" id="creamateCyborg">
-            <div class="left-shop-item-part">
-                <img class="shop-item-image">
-                <div>
-                    <div class="shop-item-name"></div>
-                    <div class="shop-item-price"></div>
-                </div>
-            </div>
-            <div class="right-shop-item-part">
-                <div class="shop-item-attack"></div>
-                <div class="shop-item-count"></div>
-            </div>
+      </div>
+      <div class="shop-item" id="creamateKnife">
+        <div class="left-shop-item-part">
+          <img class="shop-item-image" />
+          <div>
+            <div class="shop-item-name"></div>
+            <div class="shop-item-price"></div>
+          </div>
         </div>
-
+        <div class="right-shop-item-part">
+          <div class="shop-item-attack"></div>
+          <div class="shop-item-count"></div>
+        </div>
+      </div>
+      <div class="shop-item" id="creamatePistol">
+        <div class="left-shop-item-part">
+          <img class="shop-item-image" />
+          <div>
+            <div class="shop-item-name"></div>
+            <div class="shop-item-price"></div>
+          </div>
+        </div>
+        <div class="right-shop-item-part">
+          <div class="shop-item-attack"></div>
+          <div class="shop-item-count"></div>
+        </div>
+      </div>
+      <div class="shop-item" id="creamateAlien">
+        <div class="left-shop-item-part">
+          <img class="shop-item-image" />
+          <div>
+            <div class="shop-item-name"></div>
+            <div class="shop-item-price"></div>
+          </div>
+        </div>
+        <div class="right-shop-item-part">
+          <div class="shop-item-attack"></div>
+          <div class="shop-item-count"></div>
+        </div>
+      </div>
+      <div class="shop-item" id="creamateCyborg">
+        <div class="left-shop-item-part">
+          <img class="shop-item-image" />
+          <div>
+            <div class="shop-item-name"></div>
+            <div class="shop-item-price"></div>
+          </div>
+        </div>
+        <div class="right-shop-item-part">
+          <div class="shop-item-attack"></div>
+          <div class="shop-item-count"></div>
+        </div>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>
