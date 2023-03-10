@@ -2,7 +2,7 @@
    Everything that interacts with DOM objects
    Does not contain any game logic            */
 
-import { setBarFill } from "./bars.js";
+import { ProgressBarController, setBarFill } from "./bars.js";
 import * as helper from "./helpers.js";
 
 export { EnemyDOMController, UnitDOMController, InfoDOMController };
@@ -10,6 +10,10 @@ export { EnemyDOMController, UnitDOMController, InfoDOMController };
 const style = getComputedStyle(document.body);
 const deathAnimDelay = helper.cssDelayToNumber(
   style.getPropertyValue("--death-anim-delay")
+);
+
+const enemyHealthBar = new ProgressBarController(
+  document.getElementById("enemyHealthBar")
 );
 
 class EnemyDOMController {
@@ -52,8 +56,7 @@ class EnemyDOMController {
 
   updateEnemyHealthBar() {
     enemyHealthBarText.textContent = `${this.game.enemy.health}/${this.game.enemy.maxHealth}`;
-    setBarFill(
-      enemyHealthBar,
+    enemyHealthBar.setProgress(
       (this.game.enemy.health / this.game.enemy.maxHealth) * 100
     );
   }
