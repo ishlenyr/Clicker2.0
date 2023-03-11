@@ -2,7 +2,7 @@
    Everything that interacts with DOM objects
    Does not contain any game logic            */
 
-import { ProgressBarController, setBarFill } from "./bars.js";
+import { ProgressBarController } from "./bars.js";
 import * as helper from "./helpers.js";
 
 export { EnemyDOMController, UnitDOMController, InfoDOMController };
@@ -16,6 +16,9 @@ const enemyHealthBar = new ProgressBarController(
   document.getElementById("enemyHealthBar")
 );
 
+const enemyImage = document.getElementById('enemyImage');
+const enemyName = document.getElementById('enemyName');
+const enemyHealthBarText = document.getElementById('enemyHealthBarText');
 class EnemyDOMController {
   game;
   constructor({ game }) {
@@ -104,6 +107,8 @@ class UnitDOMController {
   }
 }
 
+const moneyBar = document.getElementById('moneyBar');
+const attackBar = document.getElementById('attackBar');
 class InfoDOMController {
   updateMoneyBar(money) {
     moneyBar.textContent = money;
