@@ -4,7 +4,10 @@ import {
   UnitDOMController,
   InfoDOMController,
 } from "./DOMControllers.js";
-import { enemyTypes, unitTypes, Unit, Enemy } from "./entities.js";
+import { Unit, Enemy } from "./entities.js";
+import unitTypes from "./sets/unitTypes.js";
+import enemyTypes from "./sets/enemyTypes.js";
+import levels from './sets/levels.js';
 
 // Serves as main context for all objects and contains game logic
 class Game {
@@ -12,10 +15,14 @@ class Game {
   constructor() {
     this.damage = 10;
     this.units = [];
-    this.enemy = new Enemy(enemyTypes[0]);
+    this.enemy = new Enemy();
+    this.currentLevel = 1;
+    this.enemyHealthMultiplier = 1;
+    this.enemyIndexPool = [];
+    this.changeLevel(this.currentLevel);
+
     this.enemyDOM = new EnemyDOMController({ game: this });
     this.infoDOM = new InfoDOMController();
-
     this.infoDOM.updateMoneyBar(this.money);
     this.infoDOM.updateAttackBar(this.damage);
 
@@ -46,6 +53,27 @@ class Game {
     return this.#money;
   }
 
+  changeLevel(level) {
+    this.currentLevel = level;
+    // todo update level bar
+    this.enemyHealthMultiplier = levels[level - 1].healthMultiplier;
+    levels[level - 1].enemies.forEach((e) => {
+      const enemyTypeIndex = enemyTypes.findIndex((x) => x.id === e.id);
+      for (let index = 0; index < e.count; index++) {
+        this.enemyIndexPool.push(enemyTypeIndex);
+      }
+      this.changeEnemyToNext();
+    });
+  }
+
+  changeEnemyToNext() {
+    if (this.enemyIndexPool.length === 0) {
+      this.changeLevel(++this.currentLevel);
+    }
+    this.enemy.change(enemyTypes[this.enemyIndexPool.pop()], this.enemyHealthMultiplier);
+    console.log(this.enemyIndexPool.length);
+  }
+
   hitEnemy() {
     const remainingHelath = this.enemy.health;
     this.enemy.hit(this.damage);
@@ -55,8 +83,13 @@ class Game {
       const delay = this.enemyDOM.playDeathAnim();
       this.money += this.enemy.maxHealth + remainingHelath;
       setTimeout(() => {
-        this.enemy.change(enemyTypes[0]);
-        this.enemyDOM.updateEnemy();
+        if (this.currentLevel === 10) {
+          this.enemyDOM.hide();
+          alert('You won!');
+          return;
+        }
+        this.changeEnemyToNext();
+        this.enemyDOM.update();
       }, delay);
     } else {
       this.money += this.damage;

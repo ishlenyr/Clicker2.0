@@ -1,56 +1,4 @@
-export { enemyTypes, unitTypes, Unit, Enemy };
-
-const enemyTypes = [
-  {
-    baseHealth: 100,
-    name: "Amogus",
-  },
-];
-
-const unitTypes = [
-  {
-    id: "miniCrewmate",
-    baseCost: 5,
-    name: "Mini Crewmate",
-    baseDamage: 1,
-  },
-  {
-    id: "dog",
-    baseCost: 30,
-    name: "Dog",
-    baseDamage: 5,
-  },
-  {
-    id: "crewmate",
-    baseCost: 100,
-    name: "Crewmate",
-    baseDamage: 10,
-  },
-  {
-    id: "creamateKnife",
-    baseCost: 200,
-    name: "Crewmate with a knife",
-    baseDamage: 20,
-  },
-  {
-    id: "creamatePistol",
-    baseCost: 300,
-    name: "Crewmate with a pistol",
-    baseDamage: 30,
-  },
-  {
-    id: "creamateAlien",
-    baseCost: 400,
-    name: "Alien Crewmate",
-    baseDamage: 40,
-  },
-  {
-    id: "creamateCyborg",
-    baseCost: 500,
-    name: "Cyborg Crewmate",
-    baseDamage: 50,
-  },
-];
+export { Unit, Enemy };
 
 class Unit {
   get cost() {
@@ -67,10 +15,10 @@ class Unit {
 }
 
 class Enemy {
-  constructor(enemyType) {
-    this.health = enemyType.baseHealth;
-    this.maxHealth = enemyType.baseHealth;
-    this.name = enemyType.name;
+  constructor() {
+    this.maxHealth = 0;
+    this.health = 0;
+    this.name = '';
   }
 
   hit(damage) {
@@ -80,8 +28,9 @@ class Enemy {
     }
   }
 
-  change(enemyType) {
-    this.health = enemyType.baseHealth;
+  change(enemyType, healthMultiplier) {
+    this.maxHealth = enemyType.baseHealth * healthMultiplier;
+    this.health = this.maxHealth;
     this.name = enemyType.name;
   }
 }

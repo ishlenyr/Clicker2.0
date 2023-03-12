@@ -25,10 +25,7 @@ class EnemyDOMController {
     this.game = game;
 
     enemyImage.onclick = this.game.hitEnemy.bind(game);
-    enemyImage.src = `img/${game.enemy.name}.png`;
-
-    this.updateEnemyHealthBar();
-    this.updateEnemyName();
+    this.update();
   }
 
   playHitAnim() {
@@ -45,12 +42,22 @@ class EnemyDOMController {
     return deathAnimDelay;
   }
 
-  updateEnemy() {
+  hide() {
+    enemyImage.style.visibility= 'hidden';
+    enemyImage.style.pointerEvents = 'none';
+  }
+
+  update() {
     this.updateEnemyHealthBar();
     this.updateEnemyName();
+    this.updateEnemyImage();
 
     enemyImage.classList.remove("hit-anim");
     enemyImage.classList.remove("death-anim");
+  }
+
+  updateEnemyImage() {
+    enemyImage.src = `img/${this.game.enemy.name}.png`;
   }
 
   updateEnemyName() {
