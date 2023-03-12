@@ -18,14 +18,12 @@ const enemyHealthBar = new ProgressBarController(
 
 const enemyImage = document.getElementById('enemyImage');
 const enemyName = document.getElementById('enemyName');
-const enemyHealthBarText = document.getElementById('enemyHealthBarText');
 class EnemyDOMController {
   game;
   constructor({ game }) {
     this.game = game;
 
     enemyImage.onclick = this.game.hitEnemy.bind(game);
-    this.update();
   }
 
   playHitAnim() {
@@ -65,7 +63,7 @@ class EnemyDOMController {
   }
 
   updateEnemyHealthBar() {
-    enemyHealthBarText.textContent = `${this.game.enemy.health}/${this.game.enemy.maxHealth}`;
+    enemyHealthBar.setText(`${this.game.enemy.health}/${this.game.enemy.maxHealth}`);
     enemyHealthBar.setProgress(
       (this.game.enemy.health / this.game.enemy.maxHealth) * 100
     );

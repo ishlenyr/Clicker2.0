@@ -5,6 +5,7 @@ import {
   InfoDOMController,
 } from "./DOMControllers.js";
 import { Unit, Enemy } from "./entities.js";
+import { ProgressBarController } from "./bars.js";
 import unitTypes from "./sets/unitTypes.js";
 import enemyTypes from "./sets/enemyTypes.js";
 import levels from './sets/levels.js';
@@ -17,14 +18,21 @@ class Game {
     this.units = [];
     this.enemy = new Enemy();
     this.currentLevel = 1;
+    this.enemiesOnLevel = 0;
+    this.enemiesKilled = 0;
     this.enemyHealthMultiplier = 1;
     this.enemyIndexPool = [];
-    this.changeLevel(this.currentLevel);
+    
 
     this.enemyDOM = new EnemyDOMController({ game: this });
     this.infoDOM = new InfoDOMController();
     this.infoDOM.updateMoneyBar(this.money);
     this.infoDOM.updateAttackBar(this.damage);
+    this.levelBar = new ProgressBarController(
+      document.getElementById("levelBar")
+    );
+
+    this.changeLevel(this.currentLevel);
 
     // bind controller to every unit type
     for (let i = 0; i < unitTypes.length; i++) {
@@ -55,15 +63,25 @@ class Game {
 
   changeLevel(level) {
     this.currentLevel = level;
-    // todo update level bar
     this.enemyHealthMultiplier = levels[level - 1].healthMultiplier;
+    
+    this.enemiesKilled = 0;
+    this.enemiesOnLevel = 0;
+
+    // update level bar
+    this.levelBar.setText(`Level ${level}`);
+    this.levelBar.setProgress(0);
+
+    // fill enemy pool with new enemies
     levels[level - 1].enemies.forEach((e) => {
       const enemyTypeIndex = enemyTypes.findIndex((x) => x.id === e.id);
       for (let index = 0; index < e.count; index++) {
         this.enemyIndexPool.push(enemyTypeIndex);
+        this.enemiesOnLevel++;
       }
-      this.changeEnemyToNext();
     });
+
+    this.changeEnemyToNext(); // update once we're done
   }
 
   changeEnemyToNext() {
@@ -71,7 +89,7 @@ class Game {
       this.changeLevel(++this.currentLevel);
     }
     this.enemy.change(enemyTypes[this.enemyIndexPool.pop()], this.enemyHealthMultiplier);
-    console.log(this.enemyIndexPool.length);
+    this.enemyDOM.update();
   }
 
   hitEnemy() {
@@ -83,13 +101,14 @@ class Game {
       const delay = this.enemyDOM.playDeathAnim();
       this.money += this.enemy.maxHealth + remainingHelath;
       setTimeout(() => {
+        this.enemiesKilled++;
+        this.levelBar.setProgress(this.enemiesKilled / this.enemiesOnLevel * 100.0);
         if (this.currentLevel === 10) {
           this.enemyDOM.hide();
           alert('You won!');
           return;
         }
         this.changeEnemyToNext();
-        this.enemyDOM.update();
       }, delay);
     } else {
       this.money += this.damage;

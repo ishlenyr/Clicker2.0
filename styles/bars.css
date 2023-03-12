@@ -15,9 +15,17 @@
   padding: 11px;
   padding-top: 4px;
   padding-bottom: 4px;
-  background-color: #664444;
+  
   text-align: center;
   position: relative;
+}
+
+.red-bar {
+  background-color: #664444;
+}
+
+.blue-bar {
+  background-color: #444f66;
 }
 
 .bar-text {
@@ -35,11 +43,18 @@
 .bar-fill {
   width: 0%;
   height: 100%;
-  background-color: #995555;
 
   position: absolute;
   top: 0;
 
   left: 0;
   transition: 400ms width;
+}
+
+.red-bar-fill {
+  background-color: #995555;
+}
+
+.blue-bar-fill {
+  background-color: #556d99;
 }

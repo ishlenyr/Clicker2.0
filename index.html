@@ -17,12 +17,18 @@
     <div class="content">
       <!-- ENEMY-->
       <div class="enemy-container">
+        <div class="bar-frame">
+          <div class="bar blue-bar" id="levelBar">
+            <div class="bar-fill blue-bar-fill"></div>
+            <span class="bar-text">LEVEL</span>
+          </div>
+        </div>
         <img draggable="false" id="enemyImage" />
         <div id="enemyName"></div>
         <div class="bar-frame">
-          <div class="bar">
-            <div class="bar-fill" id="enemyHealthBar"></div>
-            <span class="bar-text" id="enemyHealthBarText">HEALTH</span>
+          <div class="bar red-bar" id="enemyHealthBar">
+            <div class="bar-fill red-bar-fill"></div>
+            <span class="bar-text">HEALTH</span>
           </div>
         </div>
       </div>
