@@ -17,15 +17,9 @@
     <div class="content">
       <!-- ENEMY-->
       <div class="enemy-container">
-        <div class="bar-frame">
-          <div class="bar blue-bar" id="levelBar">
-            <div class="bar-fill blue-bar-fill"></div>
-            <span class="bar-text">LEVEL</span>
-          </div>
-        </div>
         <img draggable="false" id="enemyImage" />
         <div id="enemyName"></div>
-        <div class="bar-frame">
+        <div class="bar-frame w-half">
           <div class="bar red-bar" id="enemyHealthBar">
             <div class="bar-fill red-bar-fill"></div>
             <span class="bar-text">HEALTH</span>
@@ -33,19 +27,25 @@
         </div>
       </div>
 
-      <!-- MONEY, ATTACK-->
-      <div class="shop-container">
-        <div>
-          <div class="info-text">
-            <span>Money: </span>
-            <span id="moneyBar"></span>
-          </div>
-          <div class="info-text">
-            <span>Damage: </span>
-            <span id="attackBar"></span>
+      <div class="info-container">
+        <div class="money-block info-block">
+          <span class="info-text-title">Money</span>
+          <span id="moneyBar" class="info-text-value"></span>
+        </div>
+        <div class="damage-block info-block">
+          <span class="info-text-title">Damage</span>
+          <span id="attackBar" class="info-text-value"></span>
+        </div>
+        <div class="w-full bar-frame" style="margin: 0">
+          <div class="bar blue-bar" id="levelBar">
+            <div class="bar-fill blue-bar-fill"></div>
+            <span class="bar-text">LEVEL</span>
           </div>
         </div>
+      </div>
 
+      <!-- MONEY, ATTACK-->
+      <div class="shop-container">
         <!-- SHOP LIST-->
         <div class="shop-list">
           <div class="shop-item" id="miniCrewmate">

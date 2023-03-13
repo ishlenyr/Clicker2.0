@@ -2,9 +2,8 @@
   margin: 16px;
   padding: 7px;
 
-  width: 50%;
   min-width: 200px;
-  max-width: 600px;
+  max-width: 100%;
 
   border: solid 6px black;
   background-color: #aabbbb;
@@ -15,9 +14,14 @@
   padding: 11px;
   padding-top: 4px;
   padding-bottom: 4px;
-  
+
   text-align: center;
   position: relative;
+
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .red-bar {

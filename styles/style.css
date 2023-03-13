@@ -2,6 +2,12 @@
   --death-anim-delay: 1s;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   height: calc(100vh - 60px);
@@ -10,10 +16,11 @@ body {
 .content {
   display: grid;
   grid-template-areas:
+    "info info info info"
     "shop enemy enemy enemy"
     "shop enemy enemy enemy"
     "shop enemy enemy enemy";
-  gap: 1rem;
+  grid-template-rows: 80px 1fr;
   height: 100%;
 }
 
@@ -36,7 +43,39 @@ body {
 .shop-container {
   grid-area: shop;
   width: 100%;
-  padding-top: 2rem;
+}
+
+.info-container {
+  grid-area: info;
+  display: grid;
+  grid-template-columns: 1fr 1fr 3fr;
+}
+
+.info-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: sans-serif;
+  border: solid 6px #333333;
+}
+
+.info-text-title {
+  font-size: 0.75rem;
+}
+
+.info-text-value {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.money-block {
+  background-color: rgb(207, 207, 116);
+}
+
+.damage-block {
+  background-color: rgb(207, 116, 116);
 }
 
 .hit-anim {
@@ -103,4 +142,12 @@ body {
   font-size: 24px;
   font-family: sans-serif;
   font-weight: bold;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.w-half {
+  width: 50%;
 }

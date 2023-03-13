@@ -8,7 +8,7 @@ import { Unit, Enemy } from "./entities.js";
 import { ProgressBarController } from "./bars.js";
 import unitTypes from "./sets/unitTypes.js";
 import enemyTypes from "./sets/enemyTypes.js";
-import levels from './sets/levels.js';
+import levels from "./sets/levels.js";
 
 // Serves as main context for all objects and contains game logic
 class Game {
@@ -22,7 +22,6 @@ class Game {
     this.enemiesKilled = 0;
     this.enemyHealthMultiplier = 1;
     this.enemyIndexPool = [];
-    
 
     this.enemyDOM = new EnemyDOMController({ game: this });
     this.infoDOM = new InfoDOMController();
@@ -64,7 +63,7 @@ class Game {
   changeLevel(level) {
     this.currentLevel = level;
     this.enemyHealthMultiplier = levels[level - 1].healthMultiplier;
-    
+
     this.enemiesKilled = 0;
     this.enemiesOnLevel = 0;
 
@@ -88,7 +87,10 @@ class Game {
     if (this.enemyIndexPool.length === 0) {
       this.changeLevel(++this.currentLevel);
     }
-    this.enemy.change(enemyTypes[this.enemyIndexPool.pop()], this.enemyHealthMultiplier);
+    this.enemy.change(
+      enemyTypes[this.enemyIndexPool.pop()],
+      this.enemyHealthMultiplier
+    );
     this.enemyDOM.update();
   }
 
@@ -102,10 +104,12 @@ class Game {
       this.money += this.enemy.maxHealth + remainingHelath;
       setTimeout(() => {
         this.enemiesKilled++;
-        this.levelBar.setProgress(this.enemiesKilled / this.enemiesOnLevel * 100.0);
+        this.levelBar.setProgress(
+          (this.enemiesKilled / this.enemiesOnLevel) * 100.0
+        );
         if (this.currentLevel === 10) {
           this.enemyDOM.hide();
-          alert('You won!');
+          alert("You won!");
           return;
         }
         this.changeEnemyToNext();
