@@ -104,10 +104,11 @@ class UnitDOMController {
   }
 
   updateAvaliability() {
-    if (this.game.money < this.unit.cost) {
-      this.element.classList.add("shop-item-disabled");
-    } else {
+    if (this.unit.cost <= this.game.money) {
       this.element.classList.remove("shop-item-disabled");
+    }
+    else {
+      this.element.classList.add("shop-item-disabled");
     }
   }
 }
