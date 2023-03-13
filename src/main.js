@@ -122,8 +122,8 @@ class Game {
 
   buyUnit(index) {
     if (this.units[index].entity.cost <= this.money) {
-      this.money -= this.units[index].entity.cost;
       this.units[index].entity.count++;
+      this.money -= this.units[index].entity.cost;
 
       this.damage += this.units[index].entity.damage;
       this.infoDOM.updateAttackBar(this.damage);
