@@ -11,7 +11,6 @@ import levels from "./sets/levels.js";
 
 // Serves as main context for all objects and contains game logic
 class Game {
-  #money;
   constructor() {
     this.damage = 10;
     this.units = [];
@@ -24,7 +23,6 @@ class Game {
 
     this.enemyDOM = new EnemyDOMController({ game: this });
     this.infoDOM = new InfoDOMController();
-    this.infoDOM.updateMoneyBar(this.money);
     this.infoDOM.updateAttackBar(this.damage);
     this.levelBar = new ProgressBarController(
       document.getElementById("levelBar")
@@ -48,17 +46,14 @@ class Game {
     }
 
     this.money = 0;
+    this.onMoneyChange();
   }
 
-  set money(value) {
-    this.#money = value;
+  onMoneyChange() {
     this.infoDOM.updateMoneyBar(this.money);
     this.units.forEach((x) => x.controller.updateAvaliability());
   }
-  get money() {
-    return this.#money;
-  }
-
+  
   changeLevel(level) {
     this.currentLevel = level;
     this.enemyHealthMultiplier = levels[level - 1].healthMultiplier;
@@ -101,6 +96,8 @@ class Game {
     if (this.enemy.health <= 0) {
       const delay = this.enemyDOM.playDeathAnim();
       this.money += this.enemy.maxHealth + remainingHelath;
+      this.onMoneyChange();
+
       setTimeout(() => {
         this.enemiesKilled++;
         this.levelBar.setProgress(
@@ -115,14 +112,16 @@ class Game {
       }, delay);
     } else {
       this.money += this.damage;
+      this.onMoneyChange();
       this.enemyDOM.playHitAnim();
     }
   }
 
   buyUnit(index) {
     if (this.units[index].entity.cost <= this.money) {
-      this.units[index].entity.count++;
       this.money -= this.units[index].entity.cost;
+      this.units[index].entity.count++;
+      this.onMoneyChange();
 
       this.damage += this.units[index].entity.damage;
       this.infoDOM.updateAttackBar(this.damage);
