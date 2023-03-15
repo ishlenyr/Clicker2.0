@@ -1,4 +1,3 @@
-// @ts-check
 import {
   EnemyDOMController,
   UnitDOMController,
@@ -134,3 +133,9 @@ class Game {
 }
 
 const myGame = new Game();
+
+const settingsDialog = document.getElementById("settings-dialog");
+const openModalBtn = document.getElementById("open-settings");
+openModalBtn?.addEventListener("click", () => {
+  settingsDialog?.showModal();
+});
