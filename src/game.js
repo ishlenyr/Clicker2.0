@@ -8,6 +8,7 @@ import {
   import enemyController from "./gameControllers/enemyController.js";
   import levelController from "./gameControllers/levelController.js";
   import shopController from "./gameControllers/shopController.js";
+  import timeController from "./gameControllers/timeController.js";
 
 // Serves as main context for all objects and contains game logic
 class Game {
@@ -26,6 +27,12 @@ class Game {
       this.enemyController = new enemyController(this);
       this.levelController = new levelController(this);
       this.shopController = new shopController(this);
+      this.timeController = new timeController(this);
+
+      window.test = () => {
+        this.timeController.updateTimePlayed()
+        console.log(this.timeController.getTimePlayedString());
+      }
   
       this.enemyDOM = new EnemyDOMController();
       this.enemyDOM.setClickListener(this.enemyController.hitEnemy.bind(this.enemyController));
