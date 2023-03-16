@@ -12,7 +12,46 @@
   </head>
 
   <body ondragstart="return false;" ondrop="return false;">
-    <header class="header-container"></header>
+    <header class="header-container">
+      <p class="header-name p-1">ඞ Abominatiogus</p>
+      <button id="statistics-btn" class="header-btn border-none">
+        Statistics
+      </button>
+      <button id="load-btn" class="header-btn">Load</button>
+      <button id="save-btn" class="header-btn">Save</button>
+      <button id="open-settings" class="header-btn p-1">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="header-icon"
+          viewBox="0 0 48 48"
+        >
+          <path d="M0 0h48v48h-48z" fill="none" />
+          <path
+            d="M38.86 25.95c.08-.64.14-1.29.14-1.95s-.06-1.31-.14-1.95l4.23-3.31c.38-.3.49-.84.24-1.28l-4-6.93c-.25-.43-.77-.61-1.22-.43l-4.98 2.01c-1.03-.79-2.16-1.46-3.38-1.97l-.75-5.3c-.09-.47-.5-.84-1-.84h-8c-.5 0-.91.37-.99.84l-.75 5.3c-1.22.51-2.35 1.17-3.38 1.97l-4.98-2.01c-.45-.17-.97 0-1.22.43l-4 6.93c-.25.43-.14.97.24 1.28l4.22 3.31c-.08.64-.14 1.29-.14 1.95s.06 1.31.14 1.95l-4.22 3.31c-.38.3-.49.84-.24 1.28l4 6.93c.25.43.77.61 1.22.43l4.98-2.01c1.03.79 2.16 1.46 3.38 1.97l.75 5.3c.08.47.49.84.99.84h8c.5 0 .91-.37.99-.84l.75-5.3c1.22-.51 2.35-1.17 3.38-1.97l4.98 2.01c.45.17.97 0 1.22-.43l4-6.93c.25-.43.14-.97-.24-1.28l-4.22-3.31zm-14.86 5.05c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"
+          />
+        </svg>
+      </button>
+      <button id="fullscreen-btn" class="header-btn p-1">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="header-icon"
+          viewBox="0 0 20 20"
+        >
+          <title>fullscreen</title>
+          <path
+            fill-rule="evenodd"
+            d="M1 1v6h2V3h4V1H1zm2 12H1v6h6v-2H3v-4zm14 4h-4v2h6v-6h-2v4zm0-16h-4v2h4v4h2V1h-2z"
+          />
+        </svg>
+      </button>
+
+      <dialog id="settings-dialog">
+        <h3>Settings</h3>
+        <form method="dialog">
+          <button>Close</button>
+        </form>
+      </dialog>
+    </header>
 
     <div class="content">
       <!-- ENEMY-->
