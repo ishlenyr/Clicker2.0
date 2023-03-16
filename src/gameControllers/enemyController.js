@@ -23,6 +23,7 @@ class enemyController {
 		this.game.enemyDOM.updateEnemyHealthBar(this.game.enemy);
 
 		if (this.game.enemy.health <= 0) {
+			const deathSound = new Audio("./audio/death.wav").play();
 			const delay = this.game.enemyDOM.playDeathAnim();
 			this.game.money += this.game.enemy.maxHealth + remainingHelath;
 			this.game.onMoneyChange();
