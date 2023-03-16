@@ -19,11 +19,8 @@ const enemyHealthBar = new ProgressBarController(
 const enemyImage = document.getElementById('enemyImage');
 const enemyName = document.getElementById('enemyName');
 class EnemyDOMController {
-  game;
-  constructor({ game }) {
-    this.game = game;
-
-    enemyImage.onclick = this.game.hitEnemy.bind(game);
+  setClickListener(callback) {
+    enemyImage.onclick = callback;
   }
 
   playHitAnim() {
@@ -41,43 +38,40 @@ class EnemyDOMController {
   }
 
   hide() {
-    enemyImage.style.visibility= 'hidden';
+    enemyImage.style.visibility = 'hidden';
     enemyImage.style.pointerEvents = 'none';
   }
 
-  update() {
-    this.updateEnemyHealthBar();
-    this.updateEnemyName();
-    this.updateEnemyImage();
+  update(enemy) {
+    this.updateEnemyHealthBar(enemy);
+    this.updateEnemyName(enemy);
+    this.updateEnemyImage(enemy);
 
     enemyImage.classList.remove("hit-anim");
     enemyImage.classList.remove("death-anim");
   }
 
-  updateEnemyImage() {
-    enemyImage.src = `img/${this.game.enemy.name}.png`;
+  updateEnemyImage(enemy) {
+    enemyImage.src = `img/${enemy.name}.png`;
   }
 
-  updateEnemyName() {
-    enemyName.textContent = this.game.enemy.name;
+  updateEnemyName(enemy) {
+    enemyName.textContent = enemy.name;
   }
 
-  updateEnemyHealthBar() {
-    enemyHealthBar.setText(`${this.game.enemy.health}/${this.game.enemy.maxHealth}`);
+  updateEnemyHealthBar(enemy) {
+    enemyHealthBar.setText(`${enemy.health}/${enemy.maxHealth}`);
     enemyHealthBar.setProgress(
-      (this.game.enemy.health / this.game.enemy.maxHealth) * 100
+      (enemy.health / enemy.maxHealth) * 100
     );
   }
 }
 
 class UnitDOMController {
-  constructor({ game, element, unit, unitIndex }) {
+  constructor({ element, unit, unitIndex }) {
     this.element = element;
     this.unit = unit;
-    this.game = game;
     this.unitIndex = unitIndex;
-
-    this.element.onclick = this.buy.bind(this);
 
     const name = this.element.getElementsByClassName("shop-item-name")[0];
     name.textContent = this.unit.name;
@@ -89,8 +83,10 @@ class UnitDOMController {
     this.updateCost();
   }
 
-  buy() {
-    this.game.buyUnit(this.unitIndex);
+  setClickListener(callback) {
+    this.element.onclick = () => {
+      callback(this.unitIndex);
+    }
   }
 
   updateCost() {
@@ -103,8 +99,8 @@ class UnitDOMController {
     count.textContent = this.unit.count;
   }
 
-  updateAvaliability() {
-    if (this.unit.cost <= this.game.money) {
+  updateAvaliability(money) {
+    if (this.unit.cost <= money) {
       this.element.classList.remove("shop-item-disabled");
     }
     else {
