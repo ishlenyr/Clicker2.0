@@ -14,7 +14,6 @@
 }
 
 .shop-item-image {
-  background-color: red;
   width: 64px;
   height: 64px;
 }
@@ -22,8 +21,7 @@
   display: flex;
   gap: 8px;
 }
-
-.left-shop-item-part > div {
+.shop-item-left-info {
   display: flex;
   flex-direction: column;
   margin-top: 8px;
@@ -54,4 +52,20 @@
 
 .shop-item:hover {
   background-color: rgb(253, 215, 221);
+}
+
+.mini-crew-item {
+  background-image: url(/img/mini-idle.png);
+  overflow: hidden;
+  background-size: 100%;
+  background-position: 0 -50%;
+  background-repeat: no-repeat;
+  transition: background-image 200ms, background-size 200ms, background-position 400ms;
+}
+
+
+.shop-item:hover .mini-crew-item {
+  background-position: center;
+  background-image: url(/img/mini-dancing.gif);
+  background-size: 90%;
 }
