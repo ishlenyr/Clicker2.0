@@ -13,17 +13,19 @@ if (backMusic.paused) {
 }
 openModalBtn?.addEventListener("click", () => {
 	settingsDialog?.showModal();
-const saveLoadDialog = document.getElementById("save-load-dialog");
 
-openSettingsBtn.addEventListener("click", () => {
-  settingsDialog.showModal();
-});
-saveBtn.addEventListener("click", () => {
-  // я питонист мне пофиг
-  saveLoadDialog.childNodes[1].textContent = "Save game";
-  saveLoadDialog.showModal();
-});
-loadBtn.addEventListener("click", () => {
-  saveLoadDialog.childNodes[1].textContent = "Load game";
-  saveLoadDialog.showModal();
+	const saveLoadDialog = document.getElementById("save-load-dialog");
+
+	openSettingsBtn.addEventListener("click", () => {
+		settingsDialog.showModal();
+	});
+	saveBtn.addEventListener("click", () => {
+		// я питонист мне пофиг
+		saveLoadDialog.childNodes[1].textContent = "Save game";
+		saveLoadDialog.showModal();
+	});
+	loadBtn.addEventListener("click", () => {
+		saveLoadDialog.childNodes[1].textContent = "Load game";
+		saveLoadDialog.showModal();
+	});
 });
