@@ -46,9 +46,69 @@
       </button>
 
       <dialog id="settings-dialog">
-        <h3>Settings</h3>
+        <h3 class="dialog-title">Settings</h3>
         <form method="dialog">
-          <button>Close</button>
+          <div class="input-group">
+            <input type="checkbox" id="theme-checkbox" />
+            <label for="theme-checkbox">Dark theme</label>
+          </div>
+          <div class="input-group input-group-range">
+            <label for="brightness-input">Brightness</label>
+            <input
+              type="range"
+              id="brightness-input"
+              min="0"
+              max="200"
+              value="100"
+            />
+          </div>
+          <div class="input-group">
+            <input type="checkbox" id="mute-checkbox" />
+            <label for="mute-checkbox">Mute sounds</label>
+          </div>
+          <div class="input-group input-group-range">
+            <label for="volume-music-input">Music volume</label>
+            <input
+              type="range"
+              id="volume-music-input"
+              min="0"
+              max="100"
+              value="50"
+            />
+          </div>
+          <div class="input-group input-group-range">
+            <label for="volume-effects-input">Effects volume</label>
+            <input
+              type="range"
+              id="volume-effects-input"
+              min="0"
+              max="100"
+              value="50"
+            />
+          </div>
+          <button class="dialog-btn">Save settings</button>
+        </form>
+      </dialog>
+
+      <dialog id="save-load-dialog">
+        <h3 class="dialog-title">Save game</h3>
+        <form method="dialog">
+          <save-slot>
+            <p slot="save-name" class="m-0" id="slot1-name">Save 1</p>
+            <span slot="save-time" id="slot1-time">--:--:--</span>
+            <span slot="save-level" id="slot1-level">------</span>
+          </save-slot>
+          <save-slot>
+            <p slot="save-name" class="m-0" id="slot2-name">Save 2</p>
+            <span slot="save-time" id="slot2-time">--:--:--</span>
+            <span slot="save-level" id="slot2-level">------</span>
+          </save-slot>
+          <save-slot>
+            <p slot="save-name" class="m-0" id="slot3-name">Save 3</p>
+            <span slot="save-time" id="slot3-time">--:--:--</span>
+            <span slot="save-level" id="slot3-level">------</span>
+          </save-slot>
+          <button class="dialog-btn w-full">Close</button>
         </form>
       </dialog>
     </header>
@@ -182,5 +242,50 @@
       </div>
     </div>
     <audio id="backMusic" src="./audio/MainTheme.wav" loop></audio>
+    <template id="save-slot-template">
+      <style>
+        .container {
+          border: 6px solid black;
+          padding: 1rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          font-family: sans-serif;
+          background-color: #aabbbb;
+          cursor: pointer;
+        }
+
+        .info {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+      </style>
+      <div class="container">
+        <slot name="save-name"></slot>
+
+        <div class="info">
+          <slot name="save-time"></slot>
+          <slot name="save-level"></slot>
+        </div>
+      </div>
+    </template>
+    <script>
+      customElements.define(
+        "save-slot",
+        class extends HTMLElement {
+          constructor() {
+            super();
+            let template = document.getElementById("save-slot-template");
+            let templateContent = template.content;
+
+            const shadowRoot = this.attachShadow({ mode: "open" });
+            shadowRoot.appendChild(templateContent.cloneNode(true));
+          }
+        }
+      );
+    </script>
   </body>
 </html>
