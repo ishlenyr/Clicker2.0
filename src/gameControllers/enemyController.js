@@ -16,7 +16,7 @@ class enemyController {
 	}
 
 	hitEnemy() {
-		const hitSound = new Audio("./audio/kick.wav").play();
+		this.game.audioController.playSoundIndependently('kick.wav');
 		const remainingHelath = this.game.enemy.health;
 		this.game.enemy.hit(this.game.damage);
 		this.game.stats.totalEnemyClicks++;

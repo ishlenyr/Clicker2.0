@@ -8,11 +8,6 @@ const loadBtn = document.getElementById("load-btn");
 
 const settingsDialog = document.getElementById("settings-dialog");
 const openModalBtn = document.getElementById("open-settings");
-document.onclick = () => {
-	if (backMusic.paused) {
-		backMusic.play();
-	}
-};
 
 openModalBtn?.addEventListener("click", () => {
 	settingsDialog?.showModal();
