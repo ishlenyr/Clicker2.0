@@ -12,6 +12,15 @@
   </head>
 
   <body ondragstart="return false;" ondrop="return false;">
+    <div
+      id="brightness-overlay"
+      class="overlay"
+      style="background-color: rgba(0, 0, 0, 0)"
+    ></div>
+    <div id="audio-overlay" class="overlay">
+      <span>Click to enable audio</span>
+    </div>
+
     <header class="header-container">
       <p class="header-name p-1">ඞ Abominatiogus</p>
       <button id="statistics-btn" class="header-btn border-none">
@@ -58,7 +67,7 @@
               type="range"
               id="brightness-input"
               min="0"
-              max="200"
+              max="100"
               value="100"
             />
           </div>
@@ -93,21 +102,53 @@
       <dialog id="save-load-dialog">
         <h3 class="dialog-title">Save game</h3>
         <form method="dialog">
-          <save-slot>
-            <p slot="save-name" class="m-0" id="slot1-name">Save 1</p>
-            <span slot="save-time" id="slot1-time">--:--:--</span>
-            <span slot="save-level" id="slot1-level">------</span>
-          </save-slot>
-          <save-slot>
-            <p slot="save-name" class="m-0" id="slot2-name">Save 2</p>
-            <span slot="save-time" id="slot2-time">--:--:--</span>
-            <span slot="save-level" id="slot2-level">------</span>
-          </save-slot>
-          <save-slot>
-            <p slot="save-name" class="m-0" id="slot3-name">Save 3</p>
-            <span slot="save-time" id="slot3-time">--:--:--</span>
-            <span slot="save-level" id="slot3-level">------</span>
-          </save-slot>
+          <div class="slot-container" id="slot-autosave">
+            <p class="m-0" id="slot1-name">Autosave</p>
+            <div class="slot-info">
+              <span id="slot1-time">--:--:--</span>
+              <span id="slot1-level">------</span>
+            </div>
+          </div>
+          <div class="slot-container" id="slot-save1">
+            <p class="m-0" id="slot1-name">Save 1</p>
+            <div class="slot-info">
+              <span id="slot1-time">--:--:--</span>
+              <span id="slot1-level">------</span>
+            </div>
+          </div>
+          <div class="slot-container" id="slot-save2">
+            <p class="m-0" id="slot2-name">Save 2</p>
+            <div class="slot-info">
+              <span id="slot2-time">--:--:--</span>
+              <span id="slot2-level">------</span>
+            </div>
+          </div>
+          <div class="slot-container" id="slot-save3">
+            <p class="m-0" id="slot3-name">Save 3</p>
+            <div class="slot-info">
+              <span id="slot3-time">--:--:--</span>
+              <span id="slot3-level">------</span>
+            </div>
+          </div>
+          <button class="dialog-btn w-full">Close</button>
+        </form>
+      </dialog>
+
+      <dialog id="statistics-dialog">
+        <h3 class="dialog-title">Statistics</h3>
+        <form method="dialog">
+          <div class="statistics-group">
+            <span>Play time: </span>
+            <span id="play-time">0</span>
+          </div>
+          <div class="statistics-group">
+            <span>Total clicks: </span>
+            <span id="total-clicks">0</span>
+          </div>
+          <div class="statistics-group">
+            <span>Enemies killed: </span>
+            <span id="enemies-killed">0</span>
+          </div>
           <button class="dialog-btn w-full">Close</button>
         </form>
       </dialog>
@@ -135,7 +176,7 @@
           <span class="info-text-title">Damage</span>
           <span id="attackBar" class="info-text-value"></span>
         </div>
-        <div class="w-full bar-frame" style="margin: 0;">
+        <div class="w-full bar-frame" style="margin: 0">
           <div class="bar blue-bar" id="levelBar">
             <div class="bar-fill blue-bar-fill"></div>
             <span class="bar-text">LEVEL</span>
@@ -242,50 +283,5 @@
       </div>
     </div>
     <audio id="backMusic" src="./audio/MainTheme.wav" loop></audio>
-    <template id="save-slot-template">
-      <style>
-        .container {
-          border: 6px solid black;
-          padding: 1rem;
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-          font-family: sans-serif;
-          background-color: #aabbbb;
-          cursor: pointer;
-        }
-
-        .info {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          font-size: 1.5rem;
-          font-weight: bold;
-        }
-      </style>
-      <div class="container">
-        <slot name="save-name"></slot>
-
-        <div class="info">
-          <slot name="save-time"></slot>
-          <slot name="save-level"></slot>
-        </div>
-      </div>
-    </template>
-    <script>
-      customElements.define(
-        "save-slot",
-        class extends HTMLElement {
-          constructor() {
-            super();
-            let template = document.getElementById("save-slot-template");
-            let templateContent = template.content;
-
-            const shadowRoot = this.attachShadow({ mode: "open" });
-            shadowRoot.appendChild(templateContent.cloneNode(true));
-          }
-        }
-      );
-    </script>
   </body>
 </html>

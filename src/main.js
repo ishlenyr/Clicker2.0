@@ -5,30 +5,34 @@ const myGame = new Game();
 const openSettingsBtn = document.getElementById("open-settings");
 const saveBtn = document.getElementById("save-btn");
 const loadBtn = document.getElementById("load-btn");
+const statisticsBtn = document.getElementById("statistics-btn");
 
 const settingsDialog = document.getElementById("settings-dialog");
-const openModalBtn = document.getElementById("open-settings");
+const saveLoadDialog = document.getElementById("save-load-dialog");
+const statisticsDialog = document.getElementById("statistics-dialog");
+
 document.onclick = () => {
-	if (backMusic.paused) {
-		backMusic.play();
-	}
+  if (backMusic.paused) {
+    backMusic.play();
+  }
 };
 
-openModalBtn?.addEventListener("click", () => {
-	settingsDialog?.showModal();
-
-	const saveLoadDialog = document.getElementById("save-load-dialog");
-
-	openSettingsBtn.addEventListener("click", () => {
-		settingsDialog.showModal();
-	});
-	saveBtn.addEventListener("click", () => {
-		// я питонист мне пофиг
-		saveLoadDialog.childNodes[1].textContent = "Save game";
-		saveLoadDialog.showModal();
-	});
-	loadBtn.addEventListener("click", () => {
-		saveLoadDialog.childNodes[1].textContent = "Load game";
-		saveLoadDialog.showModal();
-	});
+openSettingsBtn.addEventListener("click", () => {
+  settingsDialog.showModal();
 });
+saveBtn.addEventListener("click", () => {
+  // я питонист мне пофиг
+  saveLoadDialog.childNodes[1].textContent = "Save game";
+  saveLoadDialog.showModal();
+});
+loadBtn.addEventListener("click", () => {
+  saveLoadDialog.childNodes[1].textContent = "Load game";
+  saveLoadDialog.showModal();
+});
+statisticsBtn.addEventListener("click", () => {
+  statisticsDialog.showModal();
+});
+
+const audioOverlay = document.getElementById("audio-overlay");
+
+audioOverlay.addEventListener("click", () => audioOverlay.remove());
