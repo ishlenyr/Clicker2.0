@@ -241,7 +241,7 @@
         </div>
       </div>
     </div>
-    <audio id="backMusic" src="./audio/MainTheme.wav" loop></audio>
+    <audio id="backMusic" src="./audio/MainTheme.mp3" loop></audio>
     <template id="save-slot-template">
       <style>
         .container {
@@ -274,18 +274,18 @@
     </template>
     <script>
       customElements.define(
-        "save-slot",
+        'save-slot',
         class extends HTMLElement {
           constructor() {
-            super();
-            let template = document.getElementById("save-slot-template");
-            let templateContent = template.content;
+            super()
+            let template = document.getElementById('save-slot-template')
+            let templateContent = template.content
 
-            const shadowRoot = this.attachShadow({ mode: "open" });
-            shadowRoot.appendChild(templateContent.cloneNode(true));
+            const shadowRoot = this.attachShadow({ mode: 'open' })
+            shadowRoot.appendChild(templateContent.cloneNode(true))
           }
-        }
-      );
+        },
+      )
     </script>
   </body>
 </html>
