@@ -84,6 +84,7 @@ class Game {
     }
 
     const muteCheckbox = document.getElementById('mute-checkbox');
+    muteCheckbox.checked = this.settings.muteSounds;
     muteCheckbox.onchange = () => {
       this.settings.muteSounds = muteCheckbox.checked;
       this.audioController.updateMusicVolume();
