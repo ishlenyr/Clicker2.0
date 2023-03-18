@@ -104,9 +104,9 @@ class Game {
     }
 
     const saveButton = document.getElementById('save-settings-button');
-    saveButton.onclick = () => {
+    saveButton.addEventListener('click', () => {
       this.saleLoadController.saveSettings();
-    }
+    });
 
     const muteCheckbox = document.getElementById('mute-checkbox');
     muteCheckbox.checked = this.settings.muteSounds;

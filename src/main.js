@@ -69,6 +69,7 @@ loadBtn.addEventListener("click", () => {
   saveLoadDialog.showModal();
 });
 
+const statisticsDialog = document.getElementById('statistics-dialog');
 statisticsBtn.addEventListener("click", () => {
   statisticsDialog.showModal();
 });
