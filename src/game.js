@@ -1,7 +1,4 @@
-import {
-  EnemyDOMController,
-  InfoDOMController,
-} from "./DOMControllers.js";
+import { EnemyDOMController, InfoDOMController } from "./DOMControllers.js";
 import { Enemy } from "./entities.js";
 import { ProgressBarController } from "./bars.js";
 
@@ -26,16 +23,16 @@ class Game {
 
     this.stats = {
       totalEnemyClicks: 0,
-      ticksPlayed: 0
+      ticksPlayed: 0,
     };
 
     this.settings = {
-      theme: 'dark',
+      theme: "dark",
       muteSounds: false,
-      brightness: 50,
+      brightness: 0,
       musicVolume: 50,
       effectVolume: 50,
-    }
+    };
     this.money = 0;
 
     this.saleLoadController = new saleLoadController(this);
@@ -46,7 +43,9 @@ class Game {
     this.audioController = new audioController(this);
 
     this.enemyDOM = new EnemyDOMController();
-    this.enemyDOM.setClickListener(this.enemyController.hitEnemy.bind(this.enemyController));
+    this.enemyDOM.setClickListener(
+      this.enemyController.hitEnemy.bind(this.enemyController)
+    );
 
     this.infoDOM = new InfoDOMController();
     this.levelBar = new ProgressBarController(
@@ -55,17 +54,15 @@ class Game {
 
     this.saleLoadController.loadSettings();
     this.bindToSettings();
-    
-    if (this.saleLoadController.isSaveSlotExists('autosave')) {
-      this.saleLoadController.loadGame('autosave');
+
+    if (this.saleLoadController.isSaveSlotExists("autosave")) {
+      this.saleLoadController.loadGame("autosave");
       this.updateAllVisuals();
-    }
-    else {
+    } else {
       this.levelController.changeLevel(this.currentLevel);
       this.infoDOM.updateAttackBar(this.damage);
       this.onMoneyChange();
     }
-
   }
 
   loadGame(saveSlot) {
@@ -77,10 +74,12 @@ class Game {
   saveGame(saveSlot) {
     this.saleLoadController.saveGame(saveSlot);
   }
-  
+
   updateAllVisuals() {
     this.levelBar.setText(`Level ${this.currentLevel}`);
-    this.levelBar.setProgress((this.enemiesKilled / this.enemiesOnLevel) * 100.0);
+    this.levelBar.setProgress(
+      (this.enemiesKilled / this.enemiesOnLevel) * 100.0
+    );
     this.infoDOM.updateMoneyBar(this.money);
     this.infoDOM.updateAttackBar(this.damage);
     this.shopController.updateUnits();
@@ -89,31 +88,66 @@ class Game {
   }
 
   bindToSettings() {
-    const musicVolumeSlider = document.getElementById('volume-music-input');
+    const musicVolumeSlider = document.getElementById("volume-music-input");
     musicVolumeSlider.value = this.settings.musicVolume;
     musicVolumeSlider.oninput = ({ target }) => {
       this.settings.musicVolume = target.value;
       this.audioController.updateMusicVolume();
-    }
+    };
 
-    const effectsVolumeSlider = document.getElementById('volume-effects-input');
+    const effectsVolumeSlider = document.getElementById("volume-effects-input");
     effectsVolumeSlider.value = this.settings.effectVolume;
     effectsVolumeSlider.oninput = ({ target }) => {
       this.settings.effectVolume = target.value;
       this.audioController.updateMusicVolume();
-    }
+    };
 
-    const saveButton = document.getElementById('save-settings-button');
-    saveButton.addEventListener('click', () => {
+    const saveButton = document.getElementById("save-settings-button");
+    saveButton.addEventListener("click", () => {
       this.saleLoadController.saveSettings();
     });
 
-    const muteCheckbox = document.getElementById('mute-checkbox');
+    const muteCheckbox = document.getElementById("mute-checkbox");
     muteCheckbox.checked = this.settings.muteSounds;
     muteCheckbox.onchange = () => {
       this.settings.muteSounds = muteCheckbox.checked;
       this.audioController.updateMusicVolume();
+    };
+
+    const themeCheckbox = document.getElementById("theme-checkbox");
+    themeCheckbox.addEventListener("change", () => {
+      document.body.classList.toggle("dark");
+    });
+
+    const isDarkThemePreferred = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    themeCheckbox.checked = isDarkThemePreferred;
+    this.settings.theme = isDarkThemePreferred ? "dark" : "light";
+    if (isDarkThemePreferred) {
+      document.body.classList.add("dark");
     }
+
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (event) => {
+        themeCheckbox.checked = event.matches;
+        this.settings.theme = event.matches ? "dark" : "light";
+        if (event.matches) {
+          document.body.classList.add("dark");
+        } else {
+          document.body.classList.remove("dark");
+        }
+      });
+
+    const brightnessSlider = document.getElementById("brightness-input");
+    const brightnessOverlay = document.getElementById("brightness-overlay");
+    brightnessSlider.addEventListener("change", () => {
+      const val =
+        1 - (brightnessSlider.value === 1 ? 0.9 : brightnessSlider.value / 100);
+      this.settings.brightness = val;
+      brightnessOverlay.style.backgroundColor = `rgba(0, 0, 0, ${val})`;
+    });
   }
 
   onMoneyChange() {

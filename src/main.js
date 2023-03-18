@@ -95,17 +95,3 @@ function saveLoad(event) {
 
 const audioOverlay = document.getElementById("audio-overlay");
 audioOverlay.addEventListener("click", () => audioOverlay.remove());
-
-if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-  document.body.classList.add("dark");
-}
-
-window
-  .matchMedia("(prefers-color-scheme: dark)")
-  .addEventListener("change", (event) => {
-    if (event.matches) {
-      document.body.classList.add("dark");
-    } else {
-      document.body.classList.remove("dark");
-    }
-  });
