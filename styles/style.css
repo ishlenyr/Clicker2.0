@@ -323,14 +323,35 @@ dialog::backdrop {
   font-family: sans-serif;
   background-color: var(--color-lightgray);
   cursor: pointer;
+  color: black;
+  font-weight: bold;
+  font-size: 1.5rem;
+  transition: transform 200ms;
+  user-select: none;
+}
+
+.slot-container > * {
+  pointer-events: none;
+}
+
+.slot-disabled {
+  cursor: default;
+  pointer-events: none;
+  filter: contrast(0.5);
+}
+
+.slot-active:hover {
+  transform: scale(1.02);
+}
+
+.slot-active:active {
+  transform: scale(0.98);
 }
 
 .slot-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.5rem;
-  font-weight: bold;
 }
 
 .overlay {

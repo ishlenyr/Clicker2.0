@@ -16,14 +16,14 @@ class enemyController {
 	}
 
 	hitEnemy() {
-		const hitSound = new Audio("./audio/kick.wav").play();
+		this.game.audioController.playSoundIndependently('kick.wav');
 		const remainingHelath = this.game.enemy.health;
 		this.game.enemy.hit(this.game.damage);
 		this.game.stats.totalEnemyClicks++;
 		this.game.enemyDOM.updateEnemyHealthBar(this.game.enemy);
 
 		if (this.game.enemy.health <= 0) {
-			const deathSound = new Audio("./audio/death.wav").play();
+			this.game.audioController.playSoundIndependently('death.wav');
 			const delay = this.game.enemyDOM.playDeathAnim();
 			this.game.money += this.game.enemy.maxHealth + remainingHelath;
 			this.game.onMoneyChange();

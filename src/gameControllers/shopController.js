@@ -10,6 +10,13 @@ class shopController {
 		this.bindUnitsToElements();
 	}
 
+	updateUnits() {
+		this.units.forEach((x) => {
+			x.controller.updateCount();
+			x.controller.updateCost();
+		});
+	}
+
 	updateUnitsAviability() {
 		this.units.forEach((x) =>
 			x.controller.updateAvaliability(this.game.money)
@@ -35,7 +42,7 @@ class shopController {
 
 	buyUnit(index) {
 		if (this.units[index].entity.cost <= this.game.money) {
-			const buySound = new Audio("./audio/buy.wav").play();
+			this.game.audioController.playSoundIndependently('buy.wav');
 			this.game.money -= this.units[index].entity.cost;
 			this.units[index].entity.count++;
 			this.game.onMoneyChange();
