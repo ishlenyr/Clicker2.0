@@ -11,9 +11,10 @@ const settingsDialog = document.getElementById("settings-dialog");
 const openModalBtn = document.getElementById("open-settings");
 
 openModalBtn?.addEventListener("click", () => {
-	settingsDialog?.showModal();
+  settingsDialog?.showModal();
+});
 
-	const saveLoadDialog = document.getElementById("save-load-dialog");
+const saveLoadDialog = document.getElementById("save-load-dialog");
 
 openSettingsBtn.addEventListener("click", () => {
   settingsDialog.showModal();
