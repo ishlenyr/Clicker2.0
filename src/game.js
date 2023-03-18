@@ -36,31 +36,52 @@ class Game {
       musicVolume: 50,
       effectVolume: 50,
     }
+    this.money = 0;
 
+    this.saleLoadController = new saleLoadController(this);
     this.enemyController = new enemyController(this);
     this.levelController = new levelController(this);
     this.shopController = new shopController(this);
     this.timeController = new timeController(this);
-    this.saleLoadController = new saleLoadController(this);
     this.audioController = new audioController(this);
-    this.saleLoadController.loadSettings();
 
     this.enemyDOM = new EnemyDOMController();
     this.enemyDOM.setClickListener(this.enemyController.hitEnemy.bind(this.enemyController));
 
     this.infoDOM = new InfoDOMController();
-    this.infoDOM.updateAttackBar(this.damage);
     this.levelBar = new ProgressBarController(
       document.getElementById("levelBar")
     );
 
-    this.levelController.changeLevel(this.currentLevel);
-
-    this.money = 0;
-    this.onMoneyChange();
-
+    this.saleLoadController.loadSettings();
     this.bindToSettings();
+    
+    if (this.saleLoadController.isSaveSlotExists('autosave')) {
+      this.saleLoadController.loadGame('autosave');
+      this.updateAllVisuals();
+    }
+    else {
+      this.levelController.changeLevel(this.currentLevel);
+      this.infoDOM.updateAttackBar(this.damage);
+      this.onMoneyChange();
+    }
 
+  }
+
+  loadGame(saveSlot) {
+    this.timeController.resetTimestamp();
+    this.saleLoadController.loadGame(saveSlot);
+    this.updateAllVisuals();
+  }
+  
+  updateAllVisuals() {
+    this.levelBar.setText(`Level ${this.currentLevel}`);
+    this.levelBar.setProgress((this.enemiesKilled / this.enemiesOnLevel) * 100.0);
+    this.infoDOM.updateMoneyBar(this.money);
+    this.infoDOM.updateAttackBar(this.damage);
+    this.shopController.updateUnitsCount();
+    this.shopController.updateUnitsAviability();
+    this.enemyDOM.update(this.enemy);
   }
 
   bindToSettings() {

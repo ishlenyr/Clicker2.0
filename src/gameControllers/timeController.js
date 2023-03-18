@@ -8,6 +8,9 @@ class timeController {
         this.timestamp = new Date();
         this.game = game;
     }
+    resetTimestamp() {
+        this.timestamp = new Date();
+    }
     updateTimePlayed() {
         const newTimestamp = new Date()
         this.game.stats.ticksPlayed += newTimestamp - this.timestamp;
