@@ -73,13 +73,17 @@ class Game {
     this.saleLoadController.loadGame(saveSlot);
     this.updateAllVisuals();
   }
+
+  saveGame(saveSlot) {
+    this.saleLoadController.saveGame(saveSlot);
+  }
   
   updateAllVisuals() {
     this.levelBar.setText(`Level ${this.currentLevel}`);
     this.levelBar.setProgress((this.enemiesKilled / this.enemiesOnLevel) * 100.0);
     this.infoDOM.updateMoneyBar(this.money);
     this.infoDOM.updateAttackBar(this.damage);
-    this.shopController.updateUnitsCount();
+    this.shopController.updateUnits();
     this.shopController.updateUnitsAviability();
     this.enemyDOM.update(this.enemy);
   }

@@ -19,19 +19,75 @@ const saveLoadDialog = document.getElementById("save-load-dialog");
 openSettingsBtn.addEventListener("click", () => {
   settingsDialog.showModal();
 });
+
 saveBtn.addEventListener("click", () => {
-  // я питонист мне пофиг
-  saveLoadDialog.childNodes[1].textContent = "Save game";
+  saveLoadDialog.getElementsByClassName('dialog-title')[0].textContent = "Save game";
+  const slots = saveLoadDialog.getElementsByClassName('slot-container');
+  slots[0].classList.add('slot-disabled');
+  slots[0].classList.remove('slot-active');
+  for (let index = 0; index < slots.length; index++) {
+    if (index !== 0) {
+      slots[index].classList.add('slot-active');
+      slots[index].classList.remove('slot-disabled');
+    }
+
+    const saveSlot = index === 0 ? 'autosave' : 'save' + index;
+    if (myGame.saleLoadController.isSaveSlotExists(saveSlot)) {
+      const { level, time } = myGame.saleLoadController.getSaveSlotData(saveSlot);
+      const infoFields = slots[index].getElementsByClassName('slot-info')[0].getElementsByTagName('SPAN');
+      infoFields[0].textContent = time;
+      infoFields[1].textContent = `Level ${level}`;
+    }
+  }
+
   saveLoadDialog.showModal();
 });
+
 loadBtn.addEventListener("click", () => {
-  saveLoadDialog.childNodes[1].textContent = "Load game";
+  saveLoadDialog.getElementsByClassName('dialog-title')[0].textContent = "Load game";
+  const slots = saveLoadDialog.getElementsByClassName('slot-container');
+
+  for (let index = 0; index < slots.length; index++) {
+    const saveSlot = index === 0 ? 'autosave' : 'save' + index;
+    const infoFields = slots[index].getElementsByClassName('slot-info')[0].getElementsByTagName('SPAN');
+
+    if (myGame.saleLoadController.isSaveSlotExists(saveSlot)) {
+      slots[index].classList.add('slot-active');
+      slots[index].classList.remove('slot-disabled');
+
+      const { level, time } = myGame.saleLoadController.getSaveSlotData(saveSlot);
+      infoFields[0].textContent = time;
+      infoFields[1].textContent = `Level ${level}`;
+    }
+    else {
+      slots[index].classList.add('slot-disabled');
+      slots[index].classList.remove('slot-active');
+      infoFields[0].textContent = '--:--:--';
+      infoFields[1].textContent = '------';
+    }
+  }
   saveLoadDialog.showModal();
 });
+
 statisticsBtn.addEventListener("click", () => {
   statisticsDialog.showModal();
 });
 
-const audioOverlay = document.getElementById("audio-overlay");
+const slots = saveLoadDialog.getElementsByClassName('slot-container');
+for (let index = 0; index < slots.length; index++) {
+  slots[index].addEventListener('click', saveLoad);
+}
 
+function saveLoad(event) {
+  const saveSlot = event.target.id.replace('slot-', '');
+  if(saveLoadDialog.getElementsByClassName('dialog-title')[0].textContent === "Load game") {
+    myGame.loadGame(saveSlot);
+  }
+  else {
+    myGame.saveGame(saveSlot);
+  }
+  saveLoadDialog.close();
+}
+
+const audioOverlay = document.getElementById("audio-overlay");
 audioOverlay.addEventListener("click", () => audioOverlay.remove());

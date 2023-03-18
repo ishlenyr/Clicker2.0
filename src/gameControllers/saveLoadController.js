@@ -1,6 +1,10 @@
 class saleLoadController {
     constructor(game) {
         this.game = game;
+
+        setInterval(() => {
+            this.saveGame('autosave');
+        }, 60000);
     }
 
     saveSettings() {
@@ -52,6 +56,16 @@ class saleLoadController {
 
     isSaveSlotExists(saveSlot) {
         return localStorage.getItem(saveSlot) !== null;
+    }
+
+    getSaveSlotData(saveSlot) {
+        const encodedString = localStorage.getItem(saveSlot);
+        if (encodedString === null) return;
+        const data = atob(encodedString).split('|');
+        return {
+            level: Number(data[4]),
+            time: this.game.timeController.getTimePlayedString(Number(data[18]))
+        }
     }
 
     loadGame(saveSlot) {

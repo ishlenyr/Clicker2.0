@@ -16,8 +16,9 @@ class timeController {
         this.game.stats.ticksPlayed += newTimestamp - this.timestamp;
         this.timestamp = newTimestamp;
     }
-    getTimePlayedString() {
-        const seconds = Math.floor(this.game.stats.ticksPlayed / 1000);
+    getTimePlayedString(ticks) {
+        const ticksPlayed = ticks === undefined ? this.game.stats.ticksPlayed : ticks;
+        const seconds = Math.floor(ticksPlayed / 1000);
         const hour = Math.floor(seconds / 3600);
         const minute = Math.floor((seconds / 60) % 60);
         const second = seconds % 60;

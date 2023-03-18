@@ -10,10 +10,11 @@ class shopController {
 		this.bindUnitsToElements();
 	}
 
-	updateUnitsCount() {
-		this.units.forEach((x) =>
-			x.controller.updateCount()
-		);
+	updateUnits() {
+		this.units.forEach((x) => {
+			x.controller.updateCount();
+			x.controller.updateCost();
+		});
 	}
 
 	updateUnitsAviability() {
