@@ -1,5 +1,5 @@
 .shop-item {
-  background-color: pink;
+  background-color: var(--color-pink);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -33,7 +33,7 @@
 }
 
 .shop-item {
-  color: black;
+  color: var(--text-color-secondary);
 
   font-size: 24px;
   font-family: sans-serif;
@@ -42,16 +42,16 @@
 
 .shop-item-price {
   font-size: 16px;
-  color: green;
+  color: var(--color-green);
 }
 
 .shop-item-attack {
   font-size: 16px;
-  color: red;
+  color: var(--color-red);
 }
 
 .shop-item:hover {
-  background-color: rgb(253, 215, 221);
+  background-color: var(--color-lightpink);
 }
 
 .mini-crew-item {
@@ -60,9 +60,9 @@
   background-size: 100%;
   background-position: 0 -50%;
   background-repeat: no-repeat;
-  transition: background-image 200ms, background-size 200ms, background-position 400ms;
+  transition: background-image 200ms, background-size 200ms,
+    background-position 400ms;
 }
-
 
 .shop-item:hover .mini-crew-item {
   background-position: center;

@@ -11,6 +11,40 @@
 body {
   margin: 0;
   height: calc(100vh - 60px);
+
+  --color-primary: rgb(236, 236, 236);
+  --color-lightgray: #cbdfdf;
+  --color-darkgray: #e2e2e2;
+  --color-redgray: #664444;
+  --color-blue: #7b9cdb;
+  --color-darkblue: #7689b1;
+  --color-yellow: rgb(179, 179, 105);
+  --color-lightred: rgb(187, 110, 110);
+  --color-red: red;
+  --color-darkred: #c76e6e;
+  --color-green: green;
+  --color-lightpink: rgb(253, 215, 221);
+  --color-pink: pink;
+  --text-color-primary: black;
+  --text-color-secondary: white;
+}
+
+body.dark {
+  --color-primary: black;
+  --color-lightgray: #aabbbb;
+  --color-darkgray: #333333;
+  --color-redgray: #664444;
+  --color-blue: #556d99;
+  --color-darkblue: #444f66;
+  --color-yellow: rgb(207, 207, 116);
+  --color-lightred: rgb(207, 116, 116);
+  --color-red: red;
+  --color-darkred: #995555;
+  --color-green: green;
+  --color-lightpink: rgb(253, 215, 221);
+  --color-pink: pink;
+  --text-color-primary: white;
+  --text-color-secondary: black;
 }
 
 button:hover {
@@ -37,11 +71,14 @@ button:hover {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  /* TODO: replace with background-image */
+  background-color: var(--color-darkgray);
 }
 
 .shop-container {
   grid-area: shop;
   width: 100%;
+  background-color: var(--color-darkgray);
 }
 
 .info-container {
@@ -57,7 +94,8 @@ button:hover {
   align-items: center;
   gap: 0.25rem;
   font-family: sans-serif;
-  border: solid 6px #333333;
+  border: solid 6px var(--color-darkgray);
+  color: var(--text-color-secondary);
 }
 
 .info-text-title {
@@ -72,11 +110,11 @@ button:hover {
 }
 
 .money-block {
-  background-color: rgb(207, 207, 116);
+  background-color: var(--color-yellow);
 }
 
 .damage-block {
-  background-color: rgb(207, 116, 116);
+  background-color: var(--color-lightred);
 }
 
 .hit-anim {
@@ -161,22 +199,22 @@ button:hover {
 .header-container {
   width: 100%;
   height: 60px;
-  background-color: #333333;
+  background-color: var(--color-darkgray);
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 
 .header-btn {
-  border: solid 6px black;
+  border: solid 6px var(--color-primary);
   border-bottom: none;
   height: 100%;
   padding: 0 2rem;
   font-size: 1.25rem;
   font-weight: bold;
   cursor: pointer;
-  background-color: #444f66;
-  color: white;
+  background-color: var(--color-darkblue);
+  color: var(--text-color-primary);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -190,7 +228,7 @@ button:hover {
   --icon-size: 32px;
   width: var(--icon-size);
   height: var(--icon-size);
-  fill: white;
+  fill: var(--text-color-primary);
 }
 
 .p-1 {
@@ -206,7 +244,7 @@ button:hover {
 }
 
 .header-name {
-  color: white;
+  color: var(--text-color-primary);
   font-size: 2rem;
   font-weight: bold;
   font-family: sans-serif;
@@ -214,9 +252,9 @@ button:hover {
 }
 
 dialog {
-  border-color: #333333;
-  background-color: #444f66;
-  color: white;
+  border-color: var(--color-darkgray);
+  background-color: var(--color-darkblue);
+  color: var(--text-color-primary);
   font-family: sans-serif;
 }
 
@@ -240,9 +278,9 @@ dialog::backdrop {
 
 .dialog-btn {
   grid-column: span 2;
-  border: 3px solid #333333;
-  background-color: #aabbbb;
-  color: #333333;
+  border: 3px solid var(--color-darkgray);
+  background-color: var(--color-lightgray);
+  color: var(--text-color-primary);
   padding: 0.5rem;
   font-weight: bold;
   font-size: 1rem;
@@ -277,13 +315,13 @@ dialog::backdrop {
 }
 
 .slot-container {
-  border: 6px solid black;
+  border: 6px solid var(--color-primary);
   padding: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   font-family: sans-serif;
-  background-color: #aabbbb;
+  background-color: var(--color-lightgray);
   cursor: pointer;
 }
 

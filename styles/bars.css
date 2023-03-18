@@ -5,12 +5,12 @@
   min-width: 200px;
   max-width: 100%;
 
-  border: solid 6px black;
-  background-color: #aabbbb;
+  border: solid 6px var(--color-primary);
+  background-color: var(--color-lightgray);
 }
 
 .bar {
-  border: solid 6px #333333;
+  border: solid 6px var(--color-darkgray);
   padding: 11px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -25,15 +25,15 @@
 }
 
 .red-bar {
-  background-color: #664444;
+  background-color: var(--color-redgray);
 }
 
 .blue-bar {
-  background-color: #444f66;
+  background-color: var(--color-darkblue);
 }
 
 .bar-text {
-  color: white;
+  color: var(--text-color-primary);
 
   font-size: 24px;
   font-family: sans-serif;
@@ -56,9 +56,9 @@
 }
 
 .red-bar-fill {
-  background-color: #995555;
+  background-color: var(--color-darkred);
 }
 
 .blue-bar-fill {
-  background-color: #556d99;
+  background-color: var(--color-blue);
 }
