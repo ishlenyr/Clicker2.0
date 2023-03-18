@@ -8,12 +8,6 @@ const loadBtn = document.getElementById("load-btn");
 const statisticsBtn = document.getElementById("statistics-btn");
 
 const settingsDialog = document.getElementById("settings-dialog");
-const openModalBtn = document.getElementById("open-settings");
-
-openModalBtn?.addEventListener("click", () => {
-  settingsDialog?.showModal();
-});
-
 const saveLoadDialog = document.getElementById("save-load-dialog");
 
 openSettingsBtn.addEventListener("click", () => {
@@ -21,20 +15,24 @@ openSettingsBtn.addEventListener("click", () => {
 });
 
 saveBtn.addEventListener("click", () => {
-  saveLoadDialog.getElementsByClassName('dialog-title')[0].textContent = "Save game";
-  const slots = saveLoadDialog.getElementsByClassName('slot-container');
-  slots[0].classList.add('slot-disabled');
-  slots[0].classList.remove('slot-active');
+  saveLoadDialog.getElementsByClassName("dialog-title")[0].textContent =
+    "Save game";
+  const slots = saveLoadDialog.getElementsByClassName("slot-container");
+  slots[0].classList.add("slot-disabled");
+  slots[0].classList.remove("slot-active");
   for (let index = 0; index < slots.length; index++) {
     if (index !== 0) {
-      slots[index].classList.add('slot-active');
-      slots[index].classList.remove('slot-disabled');
+      slots[index].classList.add("slot-active");
+      slots[index].classList.remove("slot-disabled");
     }
 
-    const saveSlot = index === 0 ? 'autosave' : 'save' + index;
+    const saveSlot = index === 0 ? "autosave" : "save" + index;
     if (myGame.saleLoadController.isSaveSlotExists(saveSlot)) {
-      const { level, time } = myGame.saleLoadController.getSaveSlotData(saveSlot);
-      const infoFields = slots[index].getElementsByClassName('slot-info')[0].getElementsByTagName('SPAN');
+      const { level, time } =
+        myGame.saleLoadController.getSaveSlotData(saveSlot);
+      const infoFields = slots[index]
+        .getElementsByClassName("slot-info")[0]
+        .getElementsByTagName("SPAN");
       infoFields[0].textContent = time;
       infoFields[1].textContent = `Level ${level}`;
     }
@@ -44,47 +42,52 @@ saveBtn.addEventListener("click", () => {
 });
 
 loadBtn.addEventListener("click", () => {
-  saveLoadDialog.getElementsByClassName('dialog-title')[0].textContent = "Load game";
-  const slots = saveLoadDialog.getElementsByClassName('slot-container');
+  saveLoadDialog.getElementsByClassName("dialog-title")[0].textContent =
+    "Load game";
+  const slots = saveLoadDialog.getElementsByClassName("slot-container");
 
   for (let index = 0; index < slots.length; index++) {
-    const saveSlot = index === 0 ? 'autosave' : 'save' + index;
-    const infoFields = slots[index].getElementsByClassName('slot-info')[0].getElementsByTagName('SPAN');
+    const saveSlot = index === 0 ? "autosave" : "save" + index;
+    const infoFields = slots[index]
+      .getElementsByClassName("slot-info")[0]
+      .getElementsByTagName("SPAN");
 
     if (myGame.saleLoadController.isSaveSlotExists(saveSlot)) {
-      slots[index].classList.add('slot-active');
-      slots[index].classList.remove('slot-disabled');
+      slots[index].classList.add("slot-active");
+      slots[index].classList.remove("slot-disabled");
 
-      const { level, time } = myGame.saleLoadController.getSaveSlotData(saveSlot);
+      const { level, time } =
+        myGame.saleLoadController.getSaveSlotData(saveSlot);
       infoFields[0].textContent = time;
       infoFields[1].textContent = `Level ${level}`;
-    }
-    else {
-      slots[index].classList.add('slot-disabled');
-      slots[index].classList.remove('slot-active');
-      infoFields[0].textContent = '--:--:--';
-      infoFields[1].textContent = '------';
+    } else {
+      slots[index].classList.add("slot-disabled");
+      slots[index].classList.remove("slot-active");
+      infoFields[0].textContent = "--:--:--";
+      infoFields[1].textContent = "------";
     }
   }
   saveLoadDialog.showModal();
 });
 
-const statisticsDialog = document.getElementById('statistics-dialog');
+const statisticsDialog = document.getElementById("statistics-dialog");
 statisticsBtn.addEventListener("click", () => {
   statisticsDialog.showModal();
 });
 
-const slots = saveLoadDialog.getElementsByClassName('slot-container');
+const slots = saveLoadDialog.getElementsByClassName("slot-container");
 for (let index = 0; index < slots.length; index++) {
-  slots[index].addEventListener('click', saveLoad);
+  slots[index].addEventListener("click", saveLoad);
 }
 
 function saveLoad(event) {
-  const saveSlot = event.target.id.replace('slot-', '');
-  if(saveLoadDialog.getElementsByClassName('dialog-title')[0].textContent === "Load game") {
+  const saveSlot = event.target.id.replace("slot-", "");
+  if (
+    saveLoadDialog.getElementsByClassName("dialog-title")[0].textContent ===
+    "Load game"
+  ) {
     myGame.loadGame(saveSlot);
-  }
-  else {
+  } else {
     myGame.saveGame(saveSlot);
   }
   saveLoadDialog.close();
