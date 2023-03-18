@@ -1,4 +1,4 @@
-export { Unit, Enemy, Statistics };
+export { Unit, Enemy };
 
 class Unit {
   get cost() {
@@ -32,12 +32,5 @@ class Enemy {
     this.maxHealth = enemyType.baseHealth * healthMultiplier;
     this.health = this.maxHealth;
     this.name = enemyType.name;
-  }
-}
-
-class Statistics {
-  constructor() {
-      this.totalEnemyClicks = 0;
-      this.ticksPlayed = 0;
   }
 }
