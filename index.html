@@ -24,9 +24,10 @@
 
     <header class="header-container">
       <p class="header-name p-1">ඞ Abominatiogus</p>
-      <button id="statistics-btn" class="header-btn border-none">
+      <button id="statistics-btn" class="header-btn">
         Statistics
       </button>
+      <button id="new-game-btn" class="header-btn">New game</button>
       <button id="load-btn" class="header-btn">Load</button>
       <button id="save-btn" class="header-btn">Save</button>
       <button id="open-settings" class="header-btn p-1">
@@ -173,7 +174,7 @@
             <span>Enemies killed: </span>
             <span id="enemies-killed">0</span>
           </div>
-          <button class="win-btn">
+          <button id="play-again-button" class="win-btn">
             <img src="src/img/button-playagain.png" alt="play again" />
           </button>
         </form>
@@ -187,7 +188,7 @@
             <span id="total-games">0</span>
           </div>
           <div class="statistics-group">
-            <span>Play time: </span>
+            <span>Total play time: </span>
             <span id="total-play-time">0</span>
           </div>
           <div class="statistics-group">
@@ -195,7 +196,7 @@
             <span id="total-clicks">0</span>
           </div>
           <div class="statistics-group">
-            <span>Enemies killed: </span>
+            <span>Total enemies killed: </span>
             <span id="total-enemies-killed">0</span>
           </div>
           <button class="dialog-btn w-full">Close</button>

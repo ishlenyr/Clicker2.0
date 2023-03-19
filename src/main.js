@@ -102,6 +102,12 @@ const totalStatisticsDialog = document.getElementById(
   "total-statistics-dialog"
 );
 totalStatisticsBtn.addEventListener("click", () => {
+  myGame.timeController.updateTimePlayed();
+  document.getElementById('total-games').textContent = myGame.globalStats.sessions;
+  document.getElementById('total-play-time').textContent =
+    myGame.timeController.getTimePlayedString(myGame.globalStats.ticksPlayed);
+  document.getElementById('total-clicks').textContent = myGame.globalStats.totalEnemyClicks;
+  document.getElementById('total-enemies-killed').textContent = myGame.globalStats.enemiesKilled;
   totalStatisticsDialog.showModal();
 });
 
@@ -127,3 +133,8 @@ function saveLoad(event) {
 const audioOverlay = document.getElementById("audio-overlay");
 if (myGame.settings.muteSounds) audioOverlay.remove();
 audioOverlay.addEventListener("click", () => audioOverlay.remove());
+
+const newGameButton = document.getElementById('new-game-btn');
+newGameButton.addEventListener('click', () => {
+  myGame.newGame();
+});

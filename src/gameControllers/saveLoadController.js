@@ -1,12 +1,17 @@
 class saleLoadController {
     constructor(game) {
         this.game = game;
+    }
 
-        setInterval(() => {
+    startAutoSave() {
+        this.autosaveId = setInterval(() => {
             this.saveGame('autosave');
         }, 60000);
     }
 
+    stopAutoSave() {
+        clearInterval(this.autosaveId);
+    }
     saveSettings() {
         const saveString = `
         ${this.game.settings.theme === 'dark' ? 1 : 0}|
@@ -29,7 +34,11 @@ class saleLoadController {
     }
 
     saveGame(saveSlot) {
-        localStorage.setItem(saveSlot, this.getSaveString());
+        const saveString = this.getSaveString();
+        localStorage.setItem(saveSlot, saveString);
+        if(saveSlot !== 'autosave') {
+            localStorage.setItem('autosave', saveString);
+        }
     }
 
     isSaveSlotExists(saveSlot) {
@@ -67,7 +76,12 @@ class saleLoadController {
         ${this.game.shopController.units[5].entity.count}|
         ${this.game.shopController.units[6].entity.count}|
         ${this.game.stats.totalEnemyClicks}|
-        ${this.game.stats.ticksPlayed}`.replace(/[\s]*/g, '');
+        ${this.game.stats.ticksPlayed}|
+        ${this.game.stats.enemiesKilled}|
+        ${this.game.globalStats.totalEnemyClicks}|
+        ${this.game.globalStats.ticksPlayed}|
+        ${this.game.globalStats.enemiesKilled}|
+        ${this.game.globalStats.sessions}`.replace(/[\s]*/g, '');
         return btoa(saveString);
     }
 
@@ -95,6 +109,11 @@ class saleLoadController {
         }
         this.game.stats.totalEnemyClicks = Number(data[index++]);
         this.game.stats.ticksPlayed = Number(data[index++]);
+        this.game.stats.enemiesKilled = Number(data[index++]);
+        this.game.globalStats.totalEnemyClicks = Number(data[index++]);
+        this.game.globalStats.ticksPlayed = Number(data[index++]);
+        this.game.globalStats.enemiesKilled = Number(data[index++]);
+        this.game.globalStats.sessions = Number(data[index++]);
     }
 }
 
