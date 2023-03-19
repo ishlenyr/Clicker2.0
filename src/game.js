@@ -27,7 +27,7 @@ class Game {
     };
 
     this.settings = {
-      theme: "dark",
+      theme: undefined,
       muteSounds: false,
       brightness: 0,
       musicVolume: 50,
@@ -117,34 +117,44 @@ class Game {
     const themeCheckbox = document.getElementById("theme-checkbox");
     themeCheckbox.addEventListener("change", () => {
       document.body.classList.toggle("dark");
+      this.settings.theme = this.settings.theme === "light" ? "dark" : "light";
     });
 
-    const isDarkThemePreferred = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-    themeCheckbox.checked = isDarkThemePreferred;
-    this.settings.theme = isDarkThemePreferred ? "dark" : "light";
-    if (isDarkThemePreferred) {
-      document.body.classList.add("dark");
+    if (!this.settings.theme) {
+      const isDarkThemePreferred = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      themeCheckbox.checked = isDarkThemePreferred;
+      this.settings.theme = isDarkThemePreferred ? "dark" : "light";
+      if (isDarkThemePreferred) {
+        document.body.classList.add("dark");
+      }
+    } else {
+      const isDarkTheme = this.settings.theme === "dark";
+      themeCheckbox.checked = isDarkTheme;
+      isDarkTheme && document.body.classList.add("dark");
     }
 
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", (event) => {
-        themeCheckbox.checked = event.matches;
-        this.settings.theme = event.matches ? "dark" : "light";
-        if (event.matches) {
-          document.body.classList.add("dark");
-        } else {
-          document.body.classList.remove("dark");
-        }
-      });
+    // window
+    //   .matchMedia("(prefers-color-scheme: dark)")
+    //   .addEventListener("change", (event) => {
+    //     themeCheckbox.checked = event.matches;
+    //     this.settings.theme = event.matches ? "dark" : "light";
+    //     if (event.matches) {
+    //       document.body.classList.add("dark");
+    //     } else {
+    //       document.body.classList.remove("dark");
+    //     }
+    //   });
 
     const brightnessSlider = document.getElementById("brightness-input");
     const brightnessOverlay = document.getElementById("brightness-overlay");
+    brightnessOverlay.style.backgroundColor = `rgba(0, 0, 0, ${this.settings.brightness})`;
+    brightnessSlider.value = 100 - this.settings.brightness * 100;
     brightnessSlider.addEventListener("change", () => {
       const val =
         1 - (brightnessSlider.value === 1 ? 0.9 : brightnessSlider.value / 100);
+      console.log(val);
       this.settings.brightness = val;
       brightnessOverlay.style.backgroundColor = `rgba(0, 0, 0, ${val})`;
     });
