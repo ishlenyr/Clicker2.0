@@ -2,6 +2,7 @@ import { EnemyDOMController, InfoDOMController } from "./DOMControllers.js";
 import { Enemy } from "./entities.js";
 import { ProgressBarController } from "./bars.js";
 
+import autoClickController from "./gameControllers/autoClickController.js";
 import enemyController from "./gameControllers/enemyController.js";
 import levelController from "./gameControllers/levelController.js";
 import shopController from "./gameControllers/shopController.js";
@@ -41,6 +42,7 @@ class Game {
     this.shopController = new shopController(this);
     this.timeController = new timeController(this);
     this.audioController = new audioController(this);
+    this.autoClickController = new autoClickController(this);
 
     this.enemyDOM = new EnemyDOMController();
     this.enemyDOM.setClickListener(
@@ -51,6 +53,8 @@ class Game {
     this.levelBar = new ProgressBarController(
       document.getElementById("levelBar")
     );
+
+    this.bindButtonToAutoClick();
 
     this.saleLoadController.loadSettings();
     this.bindToSettings();
@@ -63,6 +67,24 @@ class Game {
       this.infoDOM.updateAttackBar(this.damage);
       this.onMoneyChange();
     }
+  }
+
+  bindButtonToAutoClick() {
+    let enabled = false;
+    document.addEventListener('keydown', (event) => {
+      if (event.code != 'KeyT') return;
+      if (enabled) {
+        document.getElementById('auto-click-label').classList.remove('auto-click-appear');
+        enabled = false;
+        this.autoClickController.disableEnemyAutoClick();
+        
+      }
+      else {
+        enabled = true;
+        document.getElementById('auto-click-label').classList.add('auto-click-appear');
+        this.autoClickController.enableEnemyAutoClick();
+      }
+    });
   }
 
   loadGame(saveSlot) {

@@ -412,3 +412,25 @@ dialog::backdrop {
 .win-btn img {
   max-width: 150px;
 }
+
+.auto-click-enabled {
+  user-select: none;
+  pointer-events: none;
+  position: fixed;
+  right: 0;
+  transform: translateX(200%);
+  background-color: var(--card-background);
+  padding: 8px;
+  border-radius: 16px;
+  filter: drop-shadow(4px 4px 1px rgba(0, 0, 0, 0.445));
+  color: var(--text-color-primary);
+  font-size: 1.5rem;
+  margin: 8px;
+  font-weight: bold;
+  font-family: sans-serif;
+  transition: transform 600ms;
+}
+
+.auto-click-appear {
+  transform: none;
+}
