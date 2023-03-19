@@ -429,6 +429,7 @@ dialog::backdrop {
   font-weight: bold;
   font-family: sans-serif;
   transition: transform 600ms;
+  z-index: 1000000;
 }
 
 .auto-click-appear {

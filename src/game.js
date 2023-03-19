@@ -93,6 +93,12 @@ class Game {
     this.updateAllVisuals();
   }
 
+  loadGameByString(string) {
+    this.timeController.resetTimestamp();
+    this.saleLoadController.loadGameFromString(string);
+    this.updateAllVisuals();
+  }
+
   saveGame(saveSlot) {
     this.saleLoadController.saveGame(saveSlot);
   }

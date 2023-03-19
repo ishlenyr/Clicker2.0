@@ -29,6 +29,24 @@ class saleLoadController {
     }
 
     saveGame(saveSlot) {
+        localStorage.setItem(saveSlot, this.getSaveString());
+    }
+
+    isSaveSlotExists(saveSlot) {
+        return localStorage.getItem(saveSlot) !== null;
+    }
+
+    getSaveSlotData(saveSlot) {
+        const encodedString = localStorage.getItem(saveSlot);
+        if (encodedString === null) return;
+        const data = atob(encodedString).split('|');
+        return {
+            level: Number(data[4]),
+            time: this.game.timeController.getTimePlayedString(Number(data[18]))
+        }
+    }
+
+    getSaveString() {
         this.game.timeController.updateTimePlayed();
         const saveString = `
         ${this.game.damage}|
@@ -50,27 +68,16 @@ class saleLoadController {
         ${this.game.shopController.units[6].entity.count}|
         ${this.game.stats.totalEnemyClicks}|
         ${this.game.stats.ticksPlayed}`.replace(/[\s]*/g, '');
-
-        localStorage.setItem(saveSlot, btoa(saveString));
-    }
-
-    isSaveSlotExists(saveSlot) {
-        return localStorage.getItem(saveSlot) !== null;
-    }
-
-    getSaveSlotData(saveSlot) {
-        const encodedString = localStorage.getItem(saveSlot);
-        if (encodedString === null) return;
-        const data = atob(encodedString).split('|');
-        return {
-            level: Number(data[4]),
-            time: this.game.timeController.getTimePlayedString(Number(data[18]))
-        }
+        return btoa(saveString);
     }
 
     loadGame(saveSlot) {
         const encodedString = localStorage.getItem(saveSlot);
         if (encodedString === null) return;
+        this.loadGameFromString(encodedString);
+    }
+
+    loadGameFromString(encodedString) {
         const data = atob(encodedString).split('|');
         let index = 0;
         this.game.damage = Number(data[index++]);
