@@ -16,6 +16,7 @@
 .shop-item-image {
   width: 64px;
   height: 64px;
+  object-fit: contain;
 }
 .left-shop-item-part {
   display: flex;
