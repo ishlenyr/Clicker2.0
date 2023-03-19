@@ -13,6 +13,9 @@ body {
   height: calc(100vh - 60px);
 
   --color-primary: rgb(236, 236, 236);
+  --shop-background: #abc8e5;
+  --card-background: #eff4fb;
+  --card-background-selected: #c8cdd3;
   --color-lightgray: #cbdfdf;
   --color-darkgray: #e2e2e2;
   --color-redgray: #664444;
@@ -20,9 +23,9 @@ body {
   --color-darkblue: #7689b1;
   --color-yellow: rgb(179, 179, 105);
   --color-lightred: rgb(187, 110, 110);
-  --color-red: red;
+  --color-red: rgb(201, 60, 60);
   --color-darkred: #c76e6e;
-  --color-green: green;
+  --color-green: #418f3a;
   --color-lightpink: rgb(253, 215, 221);
   --color-pink: pink;
   --text-color-primary: black;
@@ -31,6 +34,9 @@ body {
 
 body.dark {
   --color-primary: black;
+  --shop-background: #46526d;
+  --card-background: #5b616e;
+  --card-background-selected: #6a6f7e;
   --color-lightgray: #aabbbb;
   --color-darkgray: #333333;
   --color-redgray: #664444;
@@ -38,12 +44,12 @@ body.dark {
   --color-darkblue: #444f66;
   --color-yellow: rgb(207, 207, 116);
   --color-lightred: rgb(207, 116, 116);
-  --color-red: red;
+  --color-red: rgb(231, 109, 109);
   --color-darkred: #995555;
-  --color-green: green;
+  --color-green: #52a14b;
   --color-lightpink: rgb(253, 215, 221);
   --color-pink: pink;
-  --text-color-primary: white;
+  --text-color-primary: rgb(228, 228, 228);
   --text-color-secondary: black;
 }
 
@@ -94,7 +100,9 @@ button:hover {
   align-items: center;
   gap: 0.25rem;
   font-family: sans-serif;
-  border: solid 6px var(--color-darkgray);
+  border: solid 6px var(--color-primary);
+  border-right: none;
+  padding-right: 6px;
   color: var(--text-color-secondary);
 }
 
