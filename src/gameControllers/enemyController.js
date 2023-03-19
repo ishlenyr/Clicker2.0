@@ -20,6 +20,7 @@ class enemyController {
 		const remainingHelath = this.game.enemy.health;
 		this.game.enemy.hit(this.game.damage);
 		this.game.stats.totalEnemyClicks++;
+		this.game.globalStats.totalEnemyClicks++;
 		this.game.enemyDOM.updateEnemyHealthBar(this.game.enemy);
 
 		if (this.game.enemy.health <= 0) {
@@ -30,12 +31,14 @@ class enemyController {
 
 			setTimeout(() => {
 				this.game.enemiesKilled++;
+				this.game.stats.enemiesKilled++
+				this.game.globalStats.enemiesKilled++;
 				this.game.levelBar.setProgress(
 					(this.game.enemiesKilled / this.game.enemiesOnLevel) * 100.0
 				);
 				if (this.game.currentLevel === 10) {
 					this.game.enemyDOM.hide();
-					alert("You won!");
+					this.game.showWinDialog();
 					return;
 				}
 				this.changeEnemyToNext();

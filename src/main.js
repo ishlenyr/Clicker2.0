@@ -1,4 +1,5 @@
 import Game from "./game.js";
+import saveAs from "./FileSaver.js" // from https://github.com/eligrey/FileSaver.js
 
 const myGame = new Game();
 
@@ -14,7 +15,32 @@ openSettingsBtn.addEventListener("click", () => {
   settingsDialog.showModal();
 });
 
+let importExportMode = '';
+
+const fileInput = document.getElementById('file-input');
+fileInput.addEventListener("change", () => {
+  const reader = new FileReader();
+    reader.addEventListener('load', (event) => {
+      myGame.loadGameByString(event.target.result);
+      saveLoadDialog.close();
+    });
+    reader.readAsText(fileInput.files[0]);
+}, false);
+
+const buttonExportImport = document.getElementById('button-export-import');
+buttonExportImport.addEventListener('click', () => {
+  if (importExportMode === 'export') {
+    const blob = new Blob([myGame.saleLoadController.getSaveString()], { type: 'text/plain;charset=utf-8' });
+    saveAs(blob, 'save.data');
+  }
+  else if (importExportMode === 'import') {
+    fileInput.click();
+  }
+});
+
 saveBtn.addEventListener("click", () => {
+  importExportMode = 'export';
+  buttonExportImport.textContent = 'Export save';
   saveLoadDialog.getElementsByClassName("dialog-title")[0].textContent =
     "Save game";
   const slots = saveLoadDialog.getElementsByClassName("slot-container");
@@ -42,6 +68,8 @@ saveBtn.addEventListener("click", () => {
 });
 
 loadBtn.addEventListener("click", () => {
+  importExportMode = 'import';
+  buttonExportImport.textContent = 'Import save';
   saveLoadDialog.getElementsByClassName("dialog-title")[0].textContent =
     "Load game";
   const slots = saveLoadDialog.getElementsByClassName("slot-container");
@@ -74,6 +102,12 @@ const totalStatisticsDialog = document.getElementById(
   "total-statistics-dialog"
 );
 totalStatisticsBtn.addEventListener("click", () => {
+  myGame.timeController.updateTimePlayed();
+  document.getElementById('total-games').textContent = myGame.globalStats.sessions;
+  document.getElementById('total-play-time').textContent =
+    myGame.timeController.getTimePlayedString(myGame.globalStats.ticksPlayed);
+  document.getElementById('total-clicks').textContent = myGame.globalStats.totalEnemyClicks;
+  document.getElementById('total-enemies-killed').textContent = myGame.globalStats.enemiesKilled;
   totalStatisticsDialog.showModal();
 });
 
@@ -95,6 +129,12 @@ function saveLoad(event) {
   saveLoadDialog.close();
 }
 
+
 const audioOverlay = document.getElementById("audio-overlay");
 if (myGame.settings.muteSounds) audioOverlay.remove();
 audioOverlay.addEventListener("click", () => audioOverlay.remove());
+
+const newGameButton = document.getElementById('new-game-btn');
+newGameButton.addEventListener('click', () => {
+  myGame.newGame();
+});

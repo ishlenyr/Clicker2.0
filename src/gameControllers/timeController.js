@@ -14,11 +14,15 @@ class timeController {
     updateTimePlayed() {
         const newTimestamp = new Date()
         this.game.stats.ticksPlayed += newTimestamp - this.timestamp;
+        this.game.globalStats.ticksPlayed += newTimestamp - this.timestamp;
         this.timestamp = newTimestamp;
     }
     getTimePlayedString(ticks) {
-        const ticksPlayed = ticks === undefined ? this.game.stats.ticksPlayed : ticks;
-        const seconds = Math.floor(ticksPlayed / 1000);
+        if(ticks === undefined) {
+            this.updateTimePlayed();
+            ticks = this.game.stats.ticksPlayed;
+        }
+        const seconds = Math.floor(ticks / 1000);
         const hour = Math.floor(seconds / 3600);
         const minute = Math.floor((seconds / 60) % 60);
         const second = seconds % 60;
