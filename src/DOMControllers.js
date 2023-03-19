@@ -16,8 +16,8 @@ const enemyHealthBar = new ProgressBarController(
   document.getElementById("enemyHealthBar")
 );
 
-const enemyImage = document.getElementById('enemyImage');
-const enemyName = document.getElementById('enemyName');
+const enemyImage = document.getElementById("enemyImage");
+const enemyName = document.getElementById("enemyName");
 class EnemyDOMController {
   setClickListener(callback) {
     enemyImage.onclick = callback;
@@ -38,8 +38,8 @@ class EnemyDOMController {
   }
 
   hide() {
-    enemyImage.style.visibility = 'hidden';
-    enemyImage.style.pointerEvents = 'none';
+    enemyImage.style.visibility = "hidden";
+    enemyImage.style.pointerEvents = "none";
   }
 
   update(enemy) {
@@ -52,7 +52,7 @@ class EnemyDOMController {
   }
 
   updateEnemyImage(enemy) {
-    enemyImage.src = `img/${enemy.name}.png`;
+    enemyImage.src = `src/img/${enemy.name}.png`;
   }
 
   updateEnemyName(enemy) {
@@ -61,9 +61,7 @@ class EnemyDOMController {
 
   updateEnemyHealthBar(enemy) {
     enemyHealthBar.setText(`${enemy.health}/${enemy.maxHealth}`);
-    enemyHealthBar.setProgress(
-      (enemy.health / enemy.maxHealth) * 100
-    );
+    enemyHealthBar.setProgress((enemy.health / enemy.maxHealth) * 100);
   }
 }
 
@@ -86,7 +84,7 @@ class UnitDOMController {
   setClickListener(callback) {
     this.element.onclick = () => {
       callback(this.unitIndex);
-    }
+    };
   }
 
   updateCost() {
@@ -102,15 +100,14 @@ class UnitDOMController {
   updateAvaliability(money) {
     if (this.unit.cost <= money) {
       this.element.classList.remove("shop-item-disabled");
-    }
-    else {
+    } else {
       this.element.classList.add("shop-item-disabled");
     }
   }
 }
 
-const moneyBar = document.getElementById('moneyBar');
-const attackBar = document.getElementById('attackBar');
+const moneyBar = document.getElementById("moneyBar");
+const attackBar = document.getElementById("attackBar");
 class InfoDOMController {
   updateMoneyBar(money) {
     moneyBar.textContent = money;

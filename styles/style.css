@@ -77,7 +77,7 @@ button:hover {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-image: url("../img/background.png");
+  background-image: url("../src/img/background.png");
   background-size: 150%;
   background-repeat: no-repeat;
   background-position: center;
