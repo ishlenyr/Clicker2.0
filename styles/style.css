@@ -71,8 +71,10 @@ button:hover {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  /* TODO: replace with background-image */
-  background-color: var(--color-darkgray);
+  background-image: url("../img/background.png");
+  background-size: 150%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .shop-container {
@@ -186,6 +188,10 @@ button:hover {
   font-family: sans-serif;
   font-weight: bold;
   user-select: none;
+}
+
+#enemyName {
+  margin-top: 1rem;
 }
 
 .w-full {
