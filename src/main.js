@@ -5,7 +5,7 @@ const myGame = new Game();
 const openSettingsBtn = document.getElementById("open-settings");
 const saveBtn = document.getElementById("save-btn");
 const loadBtn = document.getElementById("load-btn");
-const statisticsBtn = document.getElementById("statistics-btn");
+const totalStatisticsBtn = document.getElementById("statistics-btn");
 
 const settingsDialog = document.getElementById("settings-dialog");
 const saveLoadDialog = document.getElementById("save-load-dialog");
@@ -70,9 +70,11 @@ loadBtn.addEventListener("click", () => {
   saveLoadDialog.showModal();
 });
 
-const statisticsDialog = document.getElementById("statistics-dialog");
-statisticsBtn.addEventListener("click", () => {
-  statisticsDialog.showModal();
+const totalStatisticsDialog = document.getElementById(
+  "total-statistics-dialog"
+);
+totalStatisticsBtn.addEventListener("click", () => {
+  totalStatisticsDialog.showModal();
 });
 
 const slots = saveLoadDialog.getElementsByClassName("slot-container");
@@ -94,4 +96,5 @@ function saveLoad(event) {
 }
 
 const audioOverlay = document.getElementById("audio-overlay");
+if (myGame.settings.muteSounds) audioOverlay.remove();
 audioOverlay.addEventListener("click", () => audioOverlay.remove());

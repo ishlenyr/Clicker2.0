@@ -77,8 +77,10 @@ button:hover {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  /* TODO: replace with background-image */
-  background-color: var(--color-darkgray);
+  background-image: url("../img/background.png");
+  background-size: 150%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .shop-container {
@@ -196,6 +198,10 @@ button:hover {
   user-select: none;
 }
 
+#enemyName {
+  margin-top: 1rem;
+}
+
 .w-full {
   width: 100%;
 }
@@ -309,12 +315,14 @@ dialog::backdrop {
   justify-content: space-between;
 }
 
+#total-statistics-dialog,
 #statistics-dialog,
 #save-load-dialog {
   width: 600px;
   max-width: 100%;
 }
 
+#total-statistics-dialog form,
 #statistics-dialog form,
 #save-load-dialog form {
   display: flex;
@@ -381,4 +389,26 @@ dialog::backdrop {
   align-items: center;
   font-family: sans-serif;
   z-index: 100000;
+}
+
+.win-image {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.win-title {
+  font-size: 2.5rem;
+  margin: 0 auto;
+}
+
+.win-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: max-content;
+  margin: 0 auto;
+}
+
+.win-btn img {
+  max-width: 150px;
 }
