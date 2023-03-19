@@ -16,11 +16,17 @@
 .shop-item-image {
   width: 64px;
   height: 64px;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  transition: background-image 200ms, background-size 200ms,
+    background-position 400ms;
 }
+
 .left-shop-item-part {
   display: flex;
   gap: 8px;
 }
+
 .shop-item-left-info {
   display: flex;
   flex-direction: column;
@@ -54,18 +60,117 @@
   background-color: var(--color-lightpink);
 }
 
+.shop-item:hover .shop-item-image {
+  background-position: center;
+  transform-origin: bottom;
+  animation: dance 1.3s infinite forwards linear;
+  transform: scaleY(0.8);
+}
+
+@keyframes dance {
+  5% {
+    transform: scaleY(0.8) skewX(10deg);
+  }
+
+  15%,
+  35% {
+    transform: skewX(10deg);
+  }
+
+  45% {
+    transform: scaleY(0.8) skewX(10deg);
+  }
+
+  55% {
+    transform: scaleY(0.8) skewX(-10deg);
+  }
+
+  65%,
+  85% {
+    transform: skewX(-10deg);
+  }
+
+  95% {
+    transform: scaleY(0.8) skewX(-10deg);
+  }
+
+  100% {
+    transform: scaleY(0.8);
+  }
+}
+
 .mini-crew-item {
-  background-image: url(/img/mini-idle.png);
-  overflow: hidden;
+  background-image: url(/img/crew-mini.png);
   background-size: 100%;
   background-position: 0 -50%;
-  background-repeat: no-repeat;
-  transition: background-image 200ms, background-size 200ms,
-    background-position 400ms;
+
 }
 
 .shop-item:hover .mini-crew-item {
-  background-position: center;
-  background-image: url(/img/mini-dancing.gif);
+  background-size: 80%;
+}
+
+.dog-item {
+  background-image: url(/img/dog.webp);
+  background-size: 150%;
+  background-position: 100% -50%;
+
+}
+
+.shop-item:hover .dog-item {
+  background-image: url(/img/dog_idle.webp);
   background-size: 90%;
+}
+
+.crew-pistol-item {
+  background-image: url(/img/crew-pistol.png);
+  background-size: 160%;
+  background-position: 30% -50%;
+}
+
+.shop-item:hover .crew-pistol-item {
+  background-size: 90%;
+}
+
+.crew-item {
+  background-image: url(/img/crew.png);
+  background-size: 130%;
+  background-position: 80% -20%;
+}
+
+.shop-item:hover .crew-item {
+  background-size: 80%;
+}
+
+.crew-knife-item {
+  background-image: url(/img/crew-knife.png);
+  background-size: 130%;
+  background-position: 80% -20%;
+}
+
+.shop-item:hover .crew-knife-item {
+  background-size: 80%;
+}
+
+.crew-alien-item {
+  background-image: url(/img/crew-alien.png);
+  background-size: 120%;
+  background-position: 100% -20%;
+}
+
+.shop-item:hover .crew-alien-item {
+  background-image: url(/img/crew-alien-idle.png);
+  background-size: 70%;
+}
+
+.crew-cyborg-item {
+  background-image: url(/img/crew-cyborg.png);
+  background-size: 120%;
+  background-position: 100% -20%;
+}
+
+.shop-item:hover .crew-cyborg-item {
+  background-image: url(/img/crew-cyborg-idle.png);
+  background-size: 100%;
+  background-position: 0% 70%;
 }

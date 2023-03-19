@@ -1,7 +1,7 @@
 class audioController {
     constructor(game) {
         this.game = game;
-        this.backgroundMusic = new Audio('../audio/MainTheme.wav');
+        this.backgroundMusic = new Audio('../audio/MainTheme.mp3');
         this.backgroundMusic.loop = 'loop';
 
 
