@@ -104,7 +104,7 @@ tutorialSkip.addEventListener("click", () => tutorialOverlay.remove());
 tutorialStart.addEventListener("click", () => {
 	tutorialStart.remove();
 	tutorialSkip.remove();
-	tutorialOverlay.addEventListener("click", showTip());
+	tutorialOverlay.addEventListener("click", showTip);
 });
 
 const tooltips = document.getElementsByClassName("tooltip");
