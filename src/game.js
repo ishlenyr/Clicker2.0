@@ -15,6 +15,7 @@ class Game {
   constructor() {
     this.damage = 10;
     this.enemy = new Enemy();
+    this.difficulty = 'easy';
 
     this.currentLevel = 1;
     this.enemiesOnLevel = 0;
@@ -98,6 +99,7 @@ class Game {
     this.stats.totalEnemyClicks = 0;
     this.stats.enemiesKilled = 0;
     this.globalStats.sessions++;
+    this.difficulty = 'easy';
     this.shopController.resetUnits();
     this.updateAllVisuals();
   }
@@ -110,12 +112,13 @@ class Game {
         document.getElementById('auto-click-label').classList.remove('auto-click-appear');
         enabled = false;
         this.autoClickController.disableEnemyAutoClick();
-
+        this.audioController.playSoundIndependently('off.wav');
       }
       else {
         enabled = true;
         document.getElementById('auto-click-label').classList.add('auto-click-appear');
         this.autoClickController.enableEnemyAutoClick();
+        this.audioController.playSoundIndependently('on.wav');
       }
     });
   }
@@ -145,6 +148,7 @@ class Game {
     this.infoDOM.updateAttackBar(this.damage);
     this.shopController.updateUnits();
     this.shopController.updateUnitsAviability();
+    document.getElementById("hard-mode-checkbox").checked = this.difficulty === 'hard';
     this.enemyDOM.update(this.enemy);
     this.enemyDOM.show();
   }
@@ -174,13 +178,24 @@ class Game {
     muteCheckbox.onchange = () => {
       this.settings.muteSounds = muteCheckbox.checked;
       this.audioController.updateMusicVolume();
+      this.audioController.playSoundIndependently('button_click.wav');
     };
 
     const themeCheckbox = document.getElementById("theme-checkbox");
     themeCheckbox.addEventListener("change", () => {
+      this.audioController.playSoundIndependently('button_click.wav');
       document.body.classList.toggle("dark");
       this.settings.theme = this.settings.theme === "light" ? "dark" : "light";
     });
+
+    const hardModeCheckbox = document.getElementById("hard-mode-checkbox");
+    hardModeCheckbox.checked = this.difficulty === 'hard';
+    hardModeCheckbox.addEventListener("change", () => {
+      this.audioController.playSoundIndependently('button_click.wav');
+      this.difficulty = hardModeCheckbox.checked === false ? 'easy' : 'hard';
+    });
+
+
 
     if (!this.settings.theme) {
       const isDarkThemePreferred = window.matchMedia(

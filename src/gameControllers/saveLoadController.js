@@ -81,7 +81,8 @@ class saleLoadController {
         ${this.game.globalStats.totalEnemyClicks}|
         ${this.game.globalStats.ticksPlayed}|
         ${this.game.globalStats.enemiesKilled}|
-        ${this.game.globalStats.sessions}`.replace(/[\s]*/g, '');
+        ${this.game.globalStats.sessions}|
+        ${this.game.difficulty === 'easy' ? 0 : 1}`.replace(/[\s]*/g, '');
         return btoa(saveString);
     }
 
@@ -114,6 +115,7 @@ class saleLoadController {
         this.game.globalStats.ticksPlayed = Number(data[index++]);
         this.game.globalStats.enemiesKilled = Number(data[index++]);
         this.game.globalStats.sessions = Number(data[index++]);
+        this.game.difficulty = data[index++] === '0' ? 'easy' : 'hard';
     }
 }
 

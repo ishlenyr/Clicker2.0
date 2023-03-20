@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+* {
+  cursor: url(../src/img/cursor.png), auto;
+}
+
 body {
   margin: 0;
   height: calc(100vh - 60px);
@@ -144,6 +148,10 @@ button:hover {
   max-width: calc(100% - 16px);
 }
 
+#enemyImage:active {
+  cursor: url(../src/img/cursor_press.png) 14 14, auto;
+}
+
 #enemyImage:hover {
   transform: scale(1.05);
 }
@@ -218,6 +226,7 @@ button:hover {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  user-select: none;
 }
 
 .header-btn {
@@ -227,7 +236,6 @@ button:hover {
   padding: 0 2rem;
   font-size: 1.25rem;
   font-weight: bold;
-  cursor: pointer;
   background-color: var(--color-darkblue);
   color: var(--text-color-primary);
   display: flex;
@@ -269,8 +277,10 @@ button:hover {
 dialog {
   border-color: var(--color-darkgray);
   background-color: var(--color-darkblue);
+  border-radius: 16px;
   color: var(--text-color-primary);
   font-family: sans-serif;
+  user-select: none;
 }
 
 dialog::backdrop {
@@ -293,13 +303,19 @@ dialog::backdrop {
 
 .dialog-btn {
   grid-column: span 2;
-  border: 3px solid var(--color-darkgray);
-  background-color: var(--color-lightgray);
+  border-radius: 16px;
+  border: none;
+  background-color: var(--card-background);
   color: var(--text-color-primary);
+  filter: drop-shadow(4px 4px 1px rgba(0, 0, 0, 0.445));
   padding: 0.5rem;
   font-weight: bold;
   font-size: 1rem;
-  cursor: pointer;
+}
+
+.dialog-btn:hover {
+  background-color: var(--card-background-selected);
+  filter: drop-shadow(4px 4px 1px rgba(0, 0, 0, 0.445));
 }
 
 .input-group {
@@ -339,20 +355,20 @@ dialog::backdrop {
   gap: 0.5rem;
   font-family: sans-serif;
   background-color: var(--color-lightgray);
-  cursor: pointer;
+  filter: drop-shadow(4px 4px 1px rgba(0, 0, 0, 0.445));
   color: black;
   font-weight: bold;
   font-size: 1.5rem;
   transition: transform 200ms;
+  border-radius: 16px;
   user-select: none;
 }
 
-.slot-container > * {
+.slot-container>* {
   pointer-events: none;
 }
 
 .slot-disabled {
-  cursor: default;
   pointer-events: none;
   filter: contrast(0.5);
 }
@@ -373,6 +389,7 @@ dialog::backdrop {
 
 .overlay {
   position: fixed;
+  user-select: none;
   inset: 0;
 }
 
@@ -391,43 +408,48 @@ dialog::backdrop {
   flex-direction: column;
   align-items: center;
   font-family: sans-serif;
-  z-index: 100000;
+  z-index: 10000;
 }
 
 .tooltip:nth-child(1) {
   top: 15%;
   left: 0%;
 }
+
 .tooltip:nth-child(2) {
   top: 0%;
   left: 0%;
 }
+
 .tooltip:nth-child(3) {
   top: 0%;
   left: 47%;
 }
+
 .tooltip:nth-child(4) {
   top: 7%;
   left: 40%;
 }
+
 .tooltip:nth-child(5) {
   top: 81%;
   left: 53%;
 }
+
 .tooltip:nth-child(6) {
   top: 15%;
   left: 58%;
 }
 
-.tooltip{
-	position: absolute;
-	display: flex;
-	flex-direction: column-reverse;
+.tooltip {
+  position: absolute;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .label:hover {
   transform: scale(1.2);
-  background-color: rgba(0, 0, 0, 0.9);
+  filter: brightness(0.6);
 }
 
 .win-image {
@@ -443,7 +465,6 @@ dialog::backdrop {
 .win-btn {
   background-color: transparent;
   border: none;
-  cursor: pointer;
   width: max-content;
   margin: 0 auto;
 }
@@ -468,7 +489,7 @@ dialog::backdrop {
   font-weight: bold;
   font-family: sans-serif;
   transition: transform 600ms;
-  z-index: 1000000;
+  z-index: 999;
 }
 
 .auto-click-appear {
@@ -481,4 +502,29 @@ dialog::backdrop {
   display: flex;
   align-items: flex-end;
   justify-content: center;
+}
+
+.grow-anim {
+  animation: grow-pop-anim 200ms;
+}
+
+.shrink-anim {
+  animation: shrink-pop-anim 200ms;
+}
+
+@keyframes grow-pop-anim {
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes shrink-pop-anim {
+  50% {
+    transform: scale(0.8);
+  }
+}
+
+.yes-no-container {
+  display: flex;
+  gap: 128px;
 }

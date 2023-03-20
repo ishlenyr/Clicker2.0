@@ -117,6 +117,7 @@ for (let index = 0; index < slots.length; index++) {
 }
 
 function saveLoad(event) {
+  playButtonSound();
   const saveSlot = event.target.id.replace("slot-", "");
   if (
     saveLoadDialog.getElementsByClassName("dialog-title")[0].textContent ===
@@ -132,18 +133,35 @@ function saveLoad(event) {
 const tutorialSkip = document.getElementById("skip-tutorial");
 const tutorialOverlay = document.getElementById("tutorial-overlay");
 const tutorialStart = document.getElementById("start-tutorial");
-tutorialSkip.addEventListener("click", () => tutorialOverlay.remove());
+const tutorialWelcomeMessage = document.getElementById("welcome-message");
+if(localStorage.getItem('once') === null) {
+
+  tutorialSkip.addEventListener("click", () =>  {
+    localStorage.setItem('once', '') ;
+    tutorialOverlay.remove()
+  });
 
 tutorialStart.addEventListener("click", () => {
+  localStorage.setItem('once', '') ;
 	tutorialStart.remove();
 	tutorialSkip.remove();
+  tutorialWelcomeMessage.remove();
 	tutorialOverlay.addEventListener("click", showTip);
 });
+}
+else {
+  tutorialOverlay.remove()
+  tutorialStart.remove();
+	tutorialSkip.remove();
+  tutorialWelcomeMessage.remove();
+}
+
 
 const tooltips = document.getElementsByClassName("tooltip");
 let tooltipCount = 0;
 
 function showTip() {
+  playButtonSound();
 	switch (tooltipCount) {
 		case 0:
 			tooltips[tooltipCount].style.display = "flex";
@@ -166,3 +184,30 @@ const newGameButton = document.getElementById('new-game-btn');
 newGameButton.addEventListener('click', () => {
   myGame.newGame();
 });
+
+const buttons = document.getElementsByTagName('BUTTON');
+for (let i = 0; i < buttons.length; i++) {
+  buttons[i].addEventListener('click', playButtonSound);
+}
+
+function playButtonSound() {
+  myGame.audioController.playSoundIndependently('button_click.wav');
+}
+
+const loadingText = document.getElementById('loading-text');
+const continueText = document.getElementById('continue-text');
+const loadingScreen = document.getElementById('loading-screen');
+
+setTimeout(() => {
+  loadingText.style.opacity='0';
+  continueText.classList.add('fade-in');
+  document.addEventListener('click', clearLoadingScreen);
+}, 2000);
+
+function clearLoadingScreen() {
+  document.removeEventListener('click', clearLoadingScreen);
+  loadingScreen.classList.add('fade-out-anim');
+    setTimeout(() => {
+      loadingScreen.remove();
+    }, 500);
+}

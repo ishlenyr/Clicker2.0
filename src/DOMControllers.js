@@ -114,10 +114,33 @@ class UnitDOMController {
 const moneyBar = document.getElementById("moneyBar");
 const attackBar = document.getElementById("attackBar");
 class InfoDOMController {
+  constructor() {
+    this.oldMoney = Number(moneyBar.textContent);
+    this.oldAttack = Number(attackBar.textContent);
+  }
   updateMoneyBar(money) {
     moneyBar.textContent = money;
+    this.playChangeAnim(moneyBar, money, this.oldMoney);
+    this.oldMoney = money;
   }
   updateAttackBar(attack) {
     attackBar.textContent = attack;
+    this.playChangeAnim(attackBar, attack, this.oldAttack);
+    this.oldAttack = attack;
+  }
+
+  playChangeAnim(element, a, b) {
+    if (a > b) {
+      element.classList.remove("grow-anim");
+      element.classList.remove("shrink-anim");
+      element.offsetWidth;
+      element.classList.add("grow-anim");
+    }
+    else if (a < b) {
+      element.classList.remove("grow-anim");
+      element.classList.remove("shrink-anim");
+      element.offsetWidth;
+      element.classList.add("shrink-anim");
+    }
   }
 }
