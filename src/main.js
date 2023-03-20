@@ -98,7 +98,6 @@ function saveLoad(event) {
 const tutorialSkip = document.getElementById("skip-tutorial");
 const tutorialOverlay = document.getElementById("tutorial-overlay");
 const tutorialStart = document.getElementById("start-tutorial");
-if (myGame.settings.muteSounds) tutorialOverlay.remove();
 tutorialSkip.addEventListener("click", () => tutorialOverlay.remove());
 
 tutorialStart.addEventListener("click", () => {
