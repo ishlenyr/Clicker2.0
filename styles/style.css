@@ -389,6 +389,7 @@ dialog::backdrop {
 
 .overlay {
   position: fixed;
+  user-select: none;
   inset: 0;
 }
 
@@ -448,7 +449,7 @@ dialog::backdrop {
 
 .label:hover {
   transform: scale(1.2);
-  background-color: rgba(0, 0, 0, 0.9);
+  filter: brightness(0.6);
 }
 
 .win-image {
@@ -521,4 +522,9 @@ dialog::backdrop {
   50% {
     transform: scale(0.8);
   }
+}
+
+.yes-no-container {
+  display: flex;
+  gap: 128px;
 }

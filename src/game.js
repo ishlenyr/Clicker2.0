@@ -110,12 +110,13 @@ class Game {
         document.getElementById('auto-click-label').classList.remove('auto-click-appear');
         enabled = false;
         this.autoClickController.disableEnemyAutoClick();
-
+        this.audioController.playSoundIndependently('off.wav');
       }
       else {
         enabled = true;
         document.getElementById('auto-click-label').classList.add('auto-click-appear');
         this.autoClickController.enableEnemyAutoClick();
+        this.audioController.playSoundIndependently('on.wav');
       }
     });
   }
@@ -174,10 +175,12 @@ class Game {
     muteCheckbox.onchange = () => {
       this.settings.muteSounds = muteCheckbox.checked;
       this.audioController.updateMusicVolume();
+      this.audioController.playSoundIndependently('button_click.wav');
     };
 
     const themeCheckbox = document.getElementById("theme-checkbox");
     themeCheckbox.addEventListener("change", () => {
+      this.audioController.playSoundIndependently('button_click.wav');
       document.body.classList.toggle("dark");
       this.settings.theme = this.settings.theme === "light" ? "dark" : "light";
     });
