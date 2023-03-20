@@ -1,0 +1,89 @@
+@font-face {
+    font-family: "Among Us";
+    src: url("../src/fonts/Impostograph-Regular.ttf") format('truetype');
+}
+
+.loading-label {
+    font-family: "Among Us";
+    font-size: 128px;
+    color: white;
+    
+}
+
+#loading-text {
+    transition: opacity 400ms;
+}
+
+.fade-in {
+    transition: opacity 400ms;
+    opacity: 1 !important;
+}
+
+#continue-text {
+    position:absolute;
+    transform: translateY(-100%) translateX(-25%);
+    text-align: center;
+    opacity: 0;
+}
+
+.hide-text {
+    visibility: hidden;
+}
+
+.amogus-load {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    z-index: 10004;
+}
+.load-circle {
+    z-index: 10005;
+    position: absolute;
+}
+
+.amogus-load-container {
+    width: 100px;
+    height: 100px;
+}
+
+.loading-screen {
+    user-select: none;
+    background-color: black;
+    z-index: 10002;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.fade-out-anim {
+    animation: fade-out 500ms forwards;
+}
+
+@keyframes fade-out {
+    to {
+        opacity: 0;
+    }
+}
+
+.star {
+    position: fixed;
+    border-radius: 100%;
+    background-color: white;
+    animation: star-shift infinite linear;
+    z-index: 10003;
+}
+
+@keyframes star-shift {
+    0% {
+        left: -10vw;
+    }
+    100% {
+        left: 110vw;
+    }
+}

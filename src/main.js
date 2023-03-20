@@ -193,3 +193,21 @@ for (let i = 0; i < buttons.length; i++) {
 function playButtonSound() {
   myGame.audioController.playSoundIndependently('button_click.wav');
 }
+
+const loadingText = document.getElementById('loading-text');
+const continueText = document.getElementById('continue-text');
+const loadingScreen = document.getElementById('loading-screen');
+
+setTimeout(() => {
+  loadingText.style.opacity='0';
+  continueText.classList.add('fade-in');
+  document.addEventListener('click', clearLoadingScreen);
+}, 2000);
+
+function clearLoadingScreen() {
+  document.removeEventListener('click', clearLoadingScreen);
+  loadingScreen.classList.add('fade-out-anim');
+    setTimeout(() => {
+      loadingScreen.remove();
+    }, 500);
+}
