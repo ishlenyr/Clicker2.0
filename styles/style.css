@@ -380,15 +380,53 @@ dialog::backdrop {
   z-index: 99999999;
 }
 
-#audio-overlay {
+.tip {
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
   font-size: 3rem;
   display: flex;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  flex-direction: column;
   align-items: center;
   font-family: sans-serif;
   z-index: 100000;
+}
+
+.tooltip:nth-child(1) {
+  top: 15%;
+  left: 0%;
+}
+.tooltip:nth-child(2) {
+  top: 0%;
+  left: 0%;
+}
+.tooltip:nth-child(3) {
+  top: 0%;
+  left: 47%;
+}
+.tooltip:nth-child(4) {
+  top: 7%;
+  left: 40%;
+}
+.tooltip:nth-child(5) {
+  top: 81%;
+  left: 53%;
+}
+.tooltip:nth-child(6) {
+  top: 15%;
+  left: 58%;
+}
+
+.tooltip{
+	position: absolute;
+	display: flex;
+	flex-direction: column-reverse;
+}
+
+.label:hover {
+  transform: scale(1.2);
+  background-color: rgba(0, 0, 0, 0.9);
 }
 
 .win-image {
