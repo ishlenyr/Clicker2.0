@@ -20,7 +20,7 @@ const enemyImage = document.getElementById("enemyImage");
 const enemyName = document.getElementById("enemyName");
 class EnemyDOMController {
   setClickListener(callback) {
-    enemyImage.onclick = callback;
+    enemyImage.onmousedown = callback;
   }
 
   playHitAnim() {
