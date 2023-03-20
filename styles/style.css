@@ -226,6 +226,7 @@ button:hover {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  user-select: none;
 }
 
 .header-btn {
@@ -276,8 +277,10 @@ button:hover {
 dialog {
   border-color: var(--color-darkgray);
   background-color: var(--color-darkblue);
+  border-radius: 16px;
   color: var(--text-color-primary);
   font-family: sans-serif;
+  user-select: none;
 }
 
 dialog::backdrop {
@@ -300,12 +303,19 @@ dialog::backdrop {
 
 .dialog-btn {
   grid-column: span 2;
-  border: 3px solid var(--color-darkgray);
-  background-color: var(--color-lightgray);
+  border-radius: 16px;
+  border: none;
+  background-color: var(--card-background);
   color: var(--text-color-primary);
+  filter: drop-shadow(4px 4px 1px rgba(0, 0, 0, 0.445));
   padding: 0.5rem;
   font-weight: bold;
   font-size: 1rem;
+}
+
+.dialog-btn:hover {
+  background-color: var(--card-background-selected);
+  filter: drop-shadow(4px 4px 1px rgba(0, 0, 0, 0.445));
 }
 
 .input-group {
@@ -345,10 +355,12 @@ dialog::backdrop {
   gap: 0.5rem;
   font-family: sans-serif;
   background-color: var(--color-lightgray);
+  filter: drop-shadow(4px 4px 1px rgba(0, 0, 0, 0.445));
   color: black;
   font-weight: bold;
   font-size: 1.5rem;
   transition: transform 200ms;
+  border-radius: 16px;
   user-select: none;
 }
 
@@ -489,4 +501,24 @@ dialog::backdrop {
   display: flex;
   align-items: flex-end;
   justify-content: center;
+}
+
+.grow-anim {
+  animation: grow-pop-anim 200ms;
+}
+
+.shrink-anim {
+  animation: shrink-pop-anim 200ms;
+}
+
+@keyframes grow-pop-anim {
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes shrink-pop-anim {
+  50% {
+    transform: scale(0.8);
+  }
 }
