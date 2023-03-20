@@ -57,7 +57,7 @@ class EnemyDOMController {
   }
 
   updateEnemyImage(enemy) {
-    enemyImage.src = `src/img/${enemy.name}.png`;
+    enemyImage.src = `src/img/${enemy.name}.svg`;
   }
 
   updateEnemyName(enemy) {

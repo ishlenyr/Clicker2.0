@@ -139,8 +139,8 @@ button:hover {
 #enemyImage {
   -webkit-user-select: none;
   user-select: none;
-  flex: 1;
   transition: transform 200ms;
+  height: calc(100% - 16px);
 }
 
 #enemyImage:hover {
@@ -434,4 +434,12 @@ dialog::backdrop {
 
 .auto-click-appear {
   transform: none;
+}
+
+.enemy-block {
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
