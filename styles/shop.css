@@ -52,6 +52,10 @@
   font-weight: bold;
 }
 
+.shop-item:active {
+  cursor: url(../src/img/cursor.png) 4 2, auto;
+}
+
 .shop-item:hover {
   background-color: var(--card-background-selected);
 }

@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+* {
+  cursor: url(../src/img/cursor.png), auto;
+}
+
 body {
   margin: 0;
   height: calc(100vh - 60px);
@@ -144,6 +148,10 @@ button:hover {
   max-width: calc(100% - 16px);
 }
 
+#enemyImage:active {
+  cursor: url(../src/img/cursor_press.png) 14 14, auto;
+}
+
 #enemyImage:hover {
   transform: scale(1.05);
 }
@@ -227,7 +235,6 @@ button:hover {
   padding: 0 2rem;
   font-size: 1.25rem;
   font-weight: bold;
-  cursor: pointer;
   background-color: var(--color-darkblue);
   color: var(--text-color-primary);
   display: flex;
@@ -299,7 +306,6 @@ dialog::backdrop {
   padding: 0.5rem;
   font-weight: bold;
   font-size: 1rem;
-  cursor: pointer;
 }
 
 .input-group {
@@ -339,7 +345,6 @@ dialog::backdrop {
   gap: 0.5rem;
   font-family: sans-serif;
   background-color: var(--color-lightgray);
-  cursor: pointer;
   color: black;
   font-weight: bold;
   font-size: 1.5rem;
@@ -347,12 +352,11 @@ dialog::backdrop {
   user-select: none;
 }
 
-.slot-container > * {
+.slot-container>* {
   pointer-events: none;
 }
 
 .slot-disabled {
-  cursor: default;
   pointer-events: none;
   filter: contrast(0.5);
 }
@@ -398,31 +402,36 @@ dialog::backdrop {
   top: 15%;
   left: 0%;
 }
+
 .tooltip:nth-child(2) {
   top: 0%;
   left: 0%;
 }
+
 .tooltip:nth-child(3) {
   top: 0%;
   left: 47%;
 }
+
 .tooltip:nth-child(4) {
   top: 7%;
   left: 40%;
 }
+
 .tooltip:nth-child(5) {
   top: 81%;
   left: 53%;
 }
+
 .tooltip:nth-child(6) {
   top: 15%;
   left: 58%;
 }
 
-.tooltip{
-	position: absolute;
-	display: flex;
-	flex-direction: column-reverse;
+.tooltip {
+  position: absolute;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .label:hover {
@@ -443,7 +452,6 @@ dialog::backdrop {
 .win-btn {
   background-color: transparent;
   border: none;
-  cursor: pointer;
   width: max-content;
   margin: 0 auto;
 }
