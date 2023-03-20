@@ -42,6 +42,11 @@ class EnemyDOMController {
     enemyImage.style.pointerEvents = "none";
   }
 
+  show() {
+    enemyImage.style.visibility = null;
+    enemyImage.style.pointerEvents = null;
+  }
+
   update(enemy) {
     this.updateEnemyHealthBar(enemy);
     this.updateEnemyName(enemy);

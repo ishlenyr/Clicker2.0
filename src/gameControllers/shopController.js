@@ -17,6 +17,12 @@ class shopController {
 		});
 	}
 
+	resetUnits() {
+		this.units.forEach((x) => {
+			x.entity.count = 0
+		});
+	}
+
 	updateUnitsAviability() {
 		this.units.forEach((x) =>
 			x.controller.updateAvaliability(this.game.money)

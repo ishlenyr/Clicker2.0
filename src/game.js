@@ -2,6 +2,7 @@ import { EnemyDOMController, InfoDOMController } from "./DOMControllers.js";
 import { Enemy } from "./entities.js";
 import { ProgressBarController } from "./bars.js";
 
+import autoClickController from "./gameControllers/autoClickController.js";
 import enemyController from "./gameControllers/enemyController.js";
 import levelController from "./gameControllers/levelController.js";
 import shopController from "./gameControllers/shopController.js";
@@ -24,7 +25,15 @@ class Game {
     this.stats = {
       totalEnemyClicks: 0,
       ticksPlayed: 0,
+      enemiesKilled: 0,
     };
+
+    this.globalStats = {
+      totalEnemyClicks: 0,
+      ticksPlayed: 0,
+      enemiesKilled: 0,
+      sessions: 1
+    }
 
     this.settings = {
       theme: undefined,
@@ -41,6 +50,7 @@ class Game {
     this.shopController = new shopController(this);
     this.timeController = new timeController(this);
     this.audioController = new audioController(this);
+    this.autoClickController = new autoClickController(this);
 
     this.enemyDOM = new EnemyDOMController();
     this.enemyDOM.setClickListener(
@@ -54,6 +64,11 @@ class Game {
 
     this.saleLoadController.loadSettings();
     this.bindToSettings();
+    this.bindButtonToAutoClick();
+    document.getElementById('play-again-button').addEventListener('click', () => {
+      this.newGame();
+      this.saleLoadController.startAutoSave();
+    });
 
     if (this.saleLoadController.isSaveSlotExists("autosave")) {
       this.saleLoadController.loadGame("autosave");
@@ -63,11 +78,57 @@ class Game {
       this.infoDOM.updateAttackBar(this.damage);
       this.onMoneyChange();
     }
+    this.saleLoadController.startAutoSave();
+  }
+
+  showWinDialog() {
+    this.saleLoadController.stopAutoSave();
+    document.getElementById('play-time').textContent = this.timeController.getTimePlayedString();
+    document.getElementById('clicks').textContent = this.stats.totalEnemyClicks;
+    document.getElementById('enemies-killed').textContent = this.stats.enemiesKilled;
+    document.getElementById('statistics-dialog').showModal();
+  }
+
+  newGame() {
+    this.currentLevel = 1;
+    this.levelController.changeLevel(this.currentLevel);
+    this.money = 0;
+    this.damage = 10;
+    this.stats.ticksPlayed = 0;
+    this.stats.totalEnemyClicks = 0;
+    this.stats.enemiesKilled = 0;
+    this.globalStats.sessions++;
+    this.shopController.resetUnits();
+    this.updateAllVisuals();
+  }
+
+  bindButtonToAutoClick() {
+    let enabled = false;
+    document.addEventListener('keydown', (event) => {
+      if (event.code != 'KeyT') return;
+      if (enabled) {
+        document.getElementById('auto-click-label').classList.remove('auto-click-appear');
+        enabled = false;
+        this.autoClickController.disableEnemyAutoClick();
+
+      }
+      else {
+        enabled = true;
+        document.getElementById('auto-click-label').classList.add('auto-click-appear');
+        this.autoClickController.enableEnemyAutoClick();
+      }
+    });
   }
 
   loadGame(saveSlot) {
     this.timeController.resetTimestamp();
     this.saleLoadController.loadGame(saveSlot);
+    this.updateAllVisuals();
+  }
+
+  loadGameByString(string) {
+    this.timeController.resetTimestamp();
+    this.saleLoadController.loadGameFromString(string);
     this.updateAllVisuals();
   }
 
@@ -85,6 +146,7 @@ class Game {
     this.shopController.updateUnits();
     this.shopController.updateUnitsAviability();
     this.enemyDOM.update(this.enemy);
+    this.enemyDOM.show();
   }
 
   bindToSettings() {
@@ -134,18 +196,6 @@ class Game {
       themeCheckbox.checked = isDarkTheme;
       isDarkTheme && document.body.classList.add("dark");
     }
-
-    // window
-    //   .matchMedia("(prefers-color-scheme: dark)")
-    //   .addEventListener("change", (event) => {
-    //     themeCheckbox.checked = event.matches;
-    //     this.settings.theme = event.matches ? "dark" : "light";
-    //     if (event.matches) {
-    //       document.body.classList.add("dark");
-    //     } else {
-    //       document.body.classList.remove("dark");
-    //     }
-    //   });
 
     const brightnessSlider = document.getElementById("brightness-input");
     const brightnessOverlay = document.getElementById("brightness-overlay");

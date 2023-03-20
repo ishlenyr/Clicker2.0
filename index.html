@@ -37,9 +37,10 @@
 
     <header class="header-container">
       <p class="header-name p-1">ඞ Abominatiogus</p>
-      <button id="statistics-btn" class="header-btn border-none">
+      <button id="statistics-btn" class="header-btn">
         Statistics
       </button>
+      <button id="new-game-btn" class="header-btn">New game</button>
       <button id="load-btn" class="header-btn">Load</button>
       <button id="save-btn" class="header-btn">Save</button>
       <button id="open-settings" class="header-btn p-1">
@@ -130,6 +131,7 @@
       </dialog>
 
       <dialog id="save-load-dialog">
+        <input id="file-input" type="file" name="name" accept=".data" style="display: none;" />
         <h3 class="dialog-title">Save game</h3>
         <form method="dialog">
           <div class="slot-container" id="slot-autosave">
@@ -160,6 +162,7 @@
               <span id="slot3-level">------</span>
             </div>
           </div>
+          <button type="button" id="button-export-import" class="dialog-btn w-full">Export save</button>
           <button class="dialog-btn w-full">Close</button>
         </form>
       </dialog>
@@ -184,7 +187,7 @@
             <span>Enemies killed: </span>
             <span id="enemies-killed">0</span>
           </div>
-          <button class="win-btn">
+          <button id="play-again-button" class="win-btn">
             <img src="src/img/button-playagain.png" alt="play again" />
           </button>
         </form>
@@ -198,7 +201,7 @@
             <span id="total-games">0</span>
           </div>
           <div class="statistics-group">
-            <span>Play time: </span>
+            <span>Total play time: </span>
             <span id="total-play-time">0</span>
           </div>
           <div class="statistics-group">
@@ -206,7 +209,7 @@
             <span id="total-clicks">0</span>
           </div>
           <div class="statistics-group">
-            <span>Enemies killed: </span>
+            <span>Total enemies killed: </span>
             <span id="total-enemies-killed">0</span>
           </div>
           <button class="dialog-btn w-full">Close</button>
@@ -217,6 +220,7 @@
     <div class="content">
       <!-- ENEMY-->
       <div class="enemy-container">
+        <span id="auto-click-label" class="auto-click-enabled">Auto click enabled</span>
         <img draggable="false" id="enemyImage" />
         <div id="enemyName"></div>
         <div class="bar-frame w-half">
@@ -345,6 +349,5 @@
         </div>
       </div>
     </div>
-    <audio id="backMusic" src="src/audio/MainTheme.mp3" loop></audio>
   </body>
 </html>
