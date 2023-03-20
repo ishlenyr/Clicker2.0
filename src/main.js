@@ -129,10 +129,38 @@ function saveLoad(event) {
   saveLoadDialog.close();
 }
 
+const tutorialSkip = document.getElementById("skip-tutorial");
+const tutorialOverlay = document.getElementById("tutorial-overlay");
+const tutorialStart = document.getElementById("start-tutorial");
+tutorialSkip.addEventListener("click", () => tutorialOverlay.remove());
 
-const audioOverlay = document.getElementById("audio-overlay");
-if (myGame.settings.muteSounds) audioOverlay.remove();
-audioOverlay.addEventListener("click", () => audioOverlay.remove());
+tutorialStart.addEventListener("click", () => {
+	tutorialStart.remove();
+	tutorialSkip.remove();
+	tutorialOverlay.addEventListener("click", showTip);
+});
+
+const tooltips = document.getElementsByClassName("tooltip");
+let tooltipCount = 0;
+
+function showTip() {
+	switch (tooltipCount) {
+		case 0:
+			tooltips[tooltipCount].style.display = "flex";
+			tooltipCount++;
+			break;
+		case tooltips.length:
+			tooltips[tooltipCount - 1].style.display = "none";
+			tooltipCount = 0;
+			tutorialOverlay.remove();
+			break;
+		default:
+			tooltips[tooltipCount - 1].style.display = "none";
+			tooltips[tooltipCount].style.display = "flex";
+			tooltipCount++;
+			break;
+	}
+}
 
 const newGameButton = document.getElementById('new-game-btn');
 newGameButton.addEventListener('click', () => {
