@@ -78,7 +78,7 @@ button:hover {
   justify-content: space-between;
   align-items: center;
   background-image: url("../src/img/background.png");
-  background-size: 150%;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -141,6 +141,7 @@ button:hover {
   user-select: none;
   transition: transform 200ms;
   height: calc(100% - 16px);
+  max-width: calc(100% - 16px);
 }
 
 #enemyImage:hover {
