@@ -134,7 +134,7 @@ const tutorialSkip = document.getElementById("skip-tutorial");
 const tutorialOverlay = document.getElementById("tutorial-overlay");
 const tutorialStart = document.getElementById("start-tutorial");
 const tutorialWelcomeMessage = document.getElementById("welcome-message");
-if(localStorage.getItem('once') === null) {
+if(localStorage.getItem('once') === null && false ) { // temporarily disabled broken tutorial
 
   tutorialSkip.addEventListener("click", () =>  {
     localStorage.setItem('once', '') ;
